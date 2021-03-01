@@ -6,7 +6,16 @@ const transactionController = require("../controllers/transactionController");
 const router = express.Router();
 
 // ANCHOR -- Location Routes --
-router.get("/", transactionController.getTransactions);
+router
+  .route("/")
+  .get(transactionController.getAllTransactions)
+  .post(transactionController.createTransaction);
+
+router
+  .route("/:id")
+  .get(transactionController.getTransaction)
+  .patch(transactionController.updateTransaction)
+  .delete(transactionController.deleteTransaction);
 
 // ANCHOR -- Export Router --
 module.exports = router;

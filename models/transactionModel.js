@@ -45,6 +45,9 @@ const transactionSchema = new mongoose.Schema(
 // SECTION == Aggregation Middle-Ware ==
 // !SECTION
 
+// SECTION == Instance Methods ==
+// !SECTION
+
 // ANCHOR -- Create Tour Model --
 const Transaction = mongoose.model("Transaction", transactionSchema);
 

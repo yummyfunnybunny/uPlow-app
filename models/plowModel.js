@@ -4,6 +4,11 @@ const mongoose = require("mongoose");
 // ANCHOR -- Create Tour Schema --
 const plowSchema = new mongoose.Schema(
   {
+    status: {
+      type: String,
+      enum: ["pending", "accepted", "completed", "cancelled"],
+      default: "pending",
+    },
     location: {
       type: mongoose.Schema.ObjectId,
       ref: "Location",
@@ -19,11 +24,11 @@ const plowSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "A plow must have a plower"],
     },
-    transaction: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Transaction",
-      required: [true, "A plow must have a transaction"],
-    },
+    // transaction: {
+    // type: mongoose.Schema.ObjectId,
+    // ref: "Transaction",
+    // required: [true, "A plow must have a transaction"],
+    // },
   },
   {
     // Schema Options
@@ -45,6 +50,9 @@ const plowSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==
+// !SECTION
+
+// SECTION == Instance Methods ==
 // !SECTION
 
 // ANCHOR -- Create Tour Model --

@@ -6,6 +6,7 @@ const locationRouter = require("./routes/locationRoutes");
 const transactionRouter = require("./routes/transactionRoutes");
 const plowRouter = require("./routes/plowRoutes");
 const viewRouter = require("./routes/viewRoutes");
+const reviewRouter = require("./routes/reviewRoutes");
 
 // ANCHOR -- Initialize Express
 const app = express();
@@ -35,6 +36,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/locations", locationRouter);
 app.use("/api/v1/transactions", transactionRouter);
 app.use("/api/v1/plows", plowRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 // ANCHOR -- Export --
 module.exports = app;

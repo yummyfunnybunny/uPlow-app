@@ -6,7 +6,16 @@ const plowController = require("../controllers/plowController");
 const router = express.Router();
 
 // ANCHOR -- Plow Routes --
-router.get("/", plowController.getPlows);
+router
+  .route("/")
+  .get(plowController.getAllPlows)
+  .post(plowController.createPlow);
+
+router
+  .route("/:id")
+  .get(plowController.getPlow)
+  .patch(plowController.updatePlow)
+  .delete(plowController.deletePlow);
 
 // ANCHOR -- Export Router --
 module.exports = router;

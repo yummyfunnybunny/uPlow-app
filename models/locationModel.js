@@ -13,7 +13,7 @@ const locationSchema = new mongoose.Schema(
     },
     coverImage: {
       type: String,
-      required: [true, "A location must have a cover image"],
+      // required: [true, "A location must have a cover image"],
     },
     images: [String],
     type: {
@@ -29,6 +29,7 @@ const locationSchema = new mongoose.Schema(
         values: ["small", "medium", "large"],
         message: "Size can only be: small, medium, large",
       },
+      default: "small",
     },
     location: {
       // required: [true, "A location must have proper location information"],
@@ -92,6 +93,9 @@ const locationSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==
+// !SECTION
+
+// SECTION == Instance Methods ==
 // !SECTION
 
 // ANCHOR -- Create Tour Model --

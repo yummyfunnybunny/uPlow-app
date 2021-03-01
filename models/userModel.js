@@ -74,6 +74,9 @@ const userSchema = new mongoose.Schema(
 // SECTION == Aggregation Middle-Ware ==
 // !SECTION
 
+// SECTION == Instance Methods ==
+// !SECTION
+
 // ANCHOR -- Create Tour Model --
 const User = mongoose.model("User", userSchema);
 
