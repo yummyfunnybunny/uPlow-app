@@ -1,0 +1,13 @@
+START BUILDING THE FRONT-END
+1. overview/homepage
+  - this page will have only the account section of it different depending on if you're logged in or not
+2. log-in page
+3. sign-up page
+4. account dashboard page
+  - 
+5. account details page
+
+START BUILDING THE API
+1. list out the routes we will need
+2. set up postman to use routes
+3. 
