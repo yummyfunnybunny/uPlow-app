@@ -25,10 +25,10 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false,
   })
-  .then(() => console.log("DB connection successful!"));
+  .then(() => console.log("🧮 Database connection successful! 🧮"));
 
 // ANCHOR -- Listen To Server --
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Listening to server on port ${port}`);
+  console.log(`🎵 Listening to server on port ${port} 🎵`);
 });

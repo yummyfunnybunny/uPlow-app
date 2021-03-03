@@ -1,6 +1,7 @@
 // ANCHOR -- Require Modules --
 const express = require("express");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/userRoutes");
 const locationRouter = require("./routes/locationRoutes");
 const transactionRouter = require("./routes/transactionRoutes");
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV !== "production") {
 // ANCHOR -- Initialize Parsers --
 app.use(express.json({ limit: "10kb" })); // sets the limit of the body to 10kb
 app.use(express.urlencoded({ extended: true, limit: "10kb" })); // this allows us to parse data coming from a url-encoded HTML form
+app.use(cookieParser());
 
 // !SECTION
 

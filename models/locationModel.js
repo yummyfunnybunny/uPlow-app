@@ -86,6 +86,9 @@ const locationSchema = new mongoose.Schema(
 // SECTION == Virtual Properties ==
 // !SECTION
 
+// SECTION == Virtual Populate ==
+// !SECTION
+
 // SECTION == Document Middle-Ware ==
 // !SECTION
 
@@ -93,6 +96,9 @@ const locationSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==
+// !SECTION
+
+// SECTION == Static Methods ==
 // !SECTION
 
 // SECTION == Instance Methods ==

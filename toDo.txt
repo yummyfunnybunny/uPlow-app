@@ -7,16 +7,7 @@ START BUILDING THE FRONT-END
   - 
 5. account details page
 
-START BUILDING THE API
-1. create authentication
-  - login route
-  - signup route
-  - reset password route
-  - forgot password route
-  - update current user password
-  - JWT
-2. complete user routes
-  - update me
-  - update user (admin use)
-  - delete me
-  - delete user (admin use)
+ERROR HANDLING?
+
+refresher on key mongoose model concepts
+
