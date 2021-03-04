@@ -41,9 +41,9 @@ ANCHOR Variables
   /* test-borders */
   /* --border-section: 1px solid red; */
   /* --border-center: 1px solid orange; */
-  --border-content: 1px solid green;
-  --border-element: 1px solid purple;
-  --border-sub-element: 1px solid blue;
+  /* --border-content: 1px solid green; */
+  /* --border-element: 1px solid purple; */
+  /* --border-sub-element: 1px solid blue; */
 }
 /*
 =============== 
@@ -59,6 +59,7 @@ ANCHOR Global Styles
 
 body {
   background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+  /* position: relative; */
 }
 
 /* section */
@@ -95,6 +96,32 @@ section {
 }
 /*
 =============== 
+ANCHOR BACKGROUND
+===============
+*/
+.bg-circle1,
+.bg-circle2 {
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.3)
+  );
+  height: 20rem;
+  width: 20rem;
+  position: fixed;
+  border-radius: 50%;
+}
+.bg-circle1 {
+  top: 5%;
+  right: 15%;
+}
+
+.bg-circle2 {
+  bottom: 5%;
+  left: 10%;
+}
+/*
+=============== 
 ANCHOR Navbar
 ===============
 */
@@ -104,6 +131,7 @@ ANCHOR Navbar
   height: 15vh;
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 .section-navbar .container {
   /* height: 100%; */
@@ -117,6 +145,7 @@ ANCHOR Navbar
   margin: 1rem 0 0.5rem 0;
   border-radius: var(--radius);
   background: var(--bg-glass1);
+  backdrop-filter: blur(2rem);
 }
 .nav-logo {
   display: flex;
@@ -174,6 +203,7 @@ ANCHOR Hero
   margin: 0.5rem 0;
   background: var(--bg-glass1);
   color: var(--color-text1);
+  backdrop-filter: blur(2rem);
 }
 .hero-extras {
   flex: 1;
@@ -189,6 +219,7 @@ ANCHOR Hero
   margin-right: 0.5rem;
   background: var(--bg-glass1);
   color: var(--color-text1);
+  backdrop-filter: blur(2rem);
 }
 .hero-weather {
   flex: 1;
@@ -199,6 +230,7 @@ ANCHOR Hero
   margin-left: 0.5rem;
   background: var(--bg-glass1);
   color: var(--color-text1);
+  backdrop-filter: blur(2rem);
 }
 /*
 =============== 
@@ -217,22 +249,84 @@ ANCHOR FEATURES
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 1rem 0;
+  backdrop-filter: blur(2rem);
 }
 .feature {
   display: flex;
   height: 10rem;
   width: 100%;
   color: var(--color-text1);
+  margin: 1rem 0;
+}
+.feature:last-child {
+  margin-bottom: 4rem;
 }
 .feature-image {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 5rem;
 }
 .feature-info {
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
+}
+
+/*
+=============== 
+ANCHOR Get Started
+===============
+*/
+.section-get-started {
+}
+.section-get-started .container {
+}
+.get-started {
+  margin: 1rem 0;
+  border-radius: var(--radius);
+  background: var(--bg-glass1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(2rem);
+}
+.step {
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  /* font-family: inherit; */
+  font-weight: 500;
+  background: var(--bg-glass2);
+  margin: 1rem;
+  color: var(--color-text1);
+  height: 10rem;
+  border-radius: var(--radius);
+}
+
+.step-title {
+  flex: 1;
+  text-align: center;
+  padding: 1rem 0;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+.step-instructions {
+  flex: 3;
+  margin: 0 1rem;
+}
+.step-image {
+  flex: 1;
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0 1rem;
+}
+.step:last-child {
+  margin-bottom: 4rem;
 }
