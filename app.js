@@ -45,6 +45,7 @@ app.use(
         "https://use.fontawesome.com/8877301646.js",
         "http://localhost:3000*",
         "'unsafe-inline'",
+        "http://127.0.0.1:3000/js/weatherApi",
       ],
       frameSrc: ["'self'"],
       objectSrc: ["'none'"],
@@ -63,7 +64,16 @@ app.use(
       childSrc: ["'self'", "blob:"],
       imgSrc: ["'self'", "data:", "blob:"],
       formAction: ["'self'"],
-      connectSrc: ["'self'", "'unsafe-inline'", "data:", "blob:"],
+      connectSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "data:",
+        "blob:",
+        "https://api.openweathermap.org/*",
+        "https://api.openweathermap.org/data/2.5/weather",
+        "ws://127.0.0.1:*/",
+        // "http://127.0.0.1:3000/index.js",
+      ],
       upgradeInsecureRequests: [],
     },
   })
@@ -79,6 +89,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // ANCHOR -- Initialize Parsers --
+app.use(express.raw());
 app.use(express.json({ limit: "10kb" })); // sets the limit of the body to 10kb
 app.use(express.urlencoded({ extended: true, limit: "10kb" })); // this allows us to parse data coming from a url-encoded HTML form
 app.use(cookieParser());

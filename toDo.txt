@@ -22,6 +22,6 @@ BACK-END
 - error handling
 - emails
 - stripe payments with plow events + transactions
--
+- 
 
 
