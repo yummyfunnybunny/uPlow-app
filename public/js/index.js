@@ -7,7 +7,7 @@ const city = "Contoocook";
 const country = "us";
 const state = "nh";
 const units = "imperial";
-const apiKey = "7bafe28bd609d8d1a3c696e86cbb332f";
+const apiKey = "";
 
 // Call getWeather
 const weather = getWeather(apiRoot, city, country, state, units, apiKey);
