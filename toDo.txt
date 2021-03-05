@@ -1,13 +1,27 @@
-START BUILDING THE FRONT-END
-1. overview/homepage
-  - this page will have only the account section of it different depending on if you're logged in or not
-2. log-in page
-3. sign-up page
-4. account dashboard page
-  - 
-5. account details page
+================
+FRONT-END
+================
+- build weather API (this may need to communicate with the back-end, not sure)
+- build content slider on hero page
+- build account content on hero page (may be able to do that now)
+- make link buttons on all pages work
+- make login/signup pages work with backend and redirect
+- toast notifications that can receive info from back-end to display errors, other stuff
+- Dashboard stuff:
+ - your jobs
+ - routes
+ - find work
+ - weather
+ - account
+ - payments
+ - settings
 
-ERROR HANDLING?
+================
+BACK-END
+================
+- error handling
+- emails
+- stripe payments with plow events + transactions
+-
 
-refresher on key mongoose model concepts
 

@@ -1,0 +1,28 @@
+/*
+=============== 
+ANCHOR Signup
+===============
+*/
+.section-signup {
+  height: 100%;
+}
+.section-signup .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15vh;
+}
+.signup {
+  background: var(--bg-glass1);
+  backdrop-filter: blur(2rem);
+  border-radius: var(--radius);
+  margin: 0.5rem 0 1rem;
+  width: 80%;
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

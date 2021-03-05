@@ -1,7 +1,9 @@
 // ANCHOR -- Require Modules --
+const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
 const userRouter = require("./routes/userRoutes");
 const locationRouter = require("./routes/locationRoutes");
 const transactionRouter = require("./routes/transactionRoutes");
@@ -13,8 +15,59 @@ const reviewRouter = require("./routes/reviewRoutes");
 const app = express();
 
 // ANCHOR -- Initialize Template Engine --
-// app.set("view engine", "pug");
-// app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
+// ANCHOR -- serving static files --
+app.use(express.static(path.join(__dirname, "public")));
+
+// ANCHOR -- Initialize Helmet --
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", "*", "localhost:*", "https:"],
+      baseUri: ["'self'"],
+      fontSrc: [
+        "'self'",
+        "*",
+        "https",
+        "data:",
+        "localhost:*",
+        "http",
+        "https://use.fontawesome.com*",
+      ],
+      scriptSrc: [
+        "*",
+        "'self'",
+        "https:",
+        "http:",
+        "blob:",
+        "https://use.fontawesome.com/8877301646.js",
+        "http://localhost:3000*",
+        "'unsafe-inline'",
+      ],
+      frameSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "unsafe-eval",
+        "fonts.googleapis.com*",
+        "https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@700&family=Press+Start+2P&display=swap",
+        "https://use.fontawesome.com/8877301646.css",
+        "https://use.fontawesome.com/releases/v4.7.0/css/font-awesome-css.min.css",
+        "https://use.fontawesome.com/releases/v5.15.2/css/all.css",
+        // "https://use.fontawesome.com/*",
+      ],
+      workerSrc: ["'self'", "data:", "blob:"],
+      childSrc: ["'self'", "blob:"],
+      imgSrc: ["'self'", "data:", "blob:"],
+      formAction: ["'self'"],
+      connectSrc: ["'self'", "'unsafe-inline'", "data:", "blob:"],
+      upgradeInsecureRequests: [],
+    },
+  })
+);
 
 // SECTION == Global Middle-Ware ==
 

@@ -1,0 +1,33 @@
+//- ANCHOR -- Extends & Includes --
+extends base
+
+//- ANCHOR -- Header Block -- 
+//- block append head
+//- block append head
+  link(rel='stylesheet' href='/css/signup.css')
+
+//- ANCHOR -- Content Block -- 
+
+block content
+  section.section-signup
+    .container
+        .signup.content
+          form.signup-form#signupForm()
+            h1.section-title signup
+            label.form-label Name
+            input.form-input(placeholder="Name" type="text" name="" required maxlength="100")
+            label.form-label Email
+            input.form-input(placeholder="Email" type="text" name="" required maxlength="100")
+            label.form-label Password
+            input.form-input(placeholder="password" type="password" required minLength="8" maxLength='50')
+            label.form-label Confirm Password
+            input.form-input(placeholder="Confirm Password" type="password" required minLength="8" maxLength='50')
+            label.form-label Choose Your Role
+            select#formSelect.form-select(name="form_select")
+              option(value="resident") Resident  
+              option(value="plower") Plower  
+              option(value="resident_plower") Resident and Plower  
+            button.btn.form-submit Submit
+          //- .signup-links
+            //- a.forgot-password(href="#") I Forgot My Password
+            //- a.forgot-email(href="#") I Forgot My Email

@@ -59,7 +59,8 @@ ANCHOR Global Styles
 
 body {
   background: linear-gradient(to right top, #65dfc9, #6cdbeb);
-  /* position: relative; */
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #426696 white; /* scroll thumb and track */
 }
 
 /* section */
@@ -90,9 +91,21 @@ section {
   border: var(--border-sub-element);
 }
 .section-title {
+  text-align: center;
   font-size: 2rem;
   padding: 1rem;
   color: var(--color-text1);
+}
+.btn {
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+  border-radius: var(--radius);
+  color: white;
+  padding: 1rem;
+  border: none;
+  /* position: relative; */
+}
+.btn:hover {
+  cursor: pointer;
 }
 /*
 =============== 
