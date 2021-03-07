@@ -15,10 +15,11 @@ block content
           form.login-form#loginForm()
             h1.section-title Login
             label.form-label Email
-            input.form-input(placeholder="Email" type="text" name="" required maxlength="100")
+            input#emailInput.form-input(placeholder="Email" type="text" name="" required maxlength="100")
             label.form-label Password
-            input.form-input(placeholder="password" type="password" required minLength="8" maxLength='50')
+            input#passwordInput.form-input(placeholder="password" type="password" required minLength="8" maxLength='50')
             button.btn.form-submit Submit
           .login-links
             a.forgot-password(href="#") I Forgot My Password
             a.forgot-email(href="#") I Forgot My Email
+          a.btn.back-button(href="/") Back

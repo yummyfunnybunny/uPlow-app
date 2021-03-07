@@ -117,7 +117,7 @@ userSchema.methods.correctPassword = function () {
 
 // !SECTION
 
-// ANCHOR -- Create Tour Model --
+// ANCHOR -- Create User Model --
 const User = mongoose.model("User", userSchema);
 
 // ANCHOR -- Export Model --

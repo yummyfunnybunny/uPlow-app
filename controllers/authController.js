@@ -8,8 +8,8 @@ const crypto = require("crypto");
 // ANCHOR -- Signup User --
 module.exports.signupUser = async (req, res, next) => {
   // 1) save the newUser to the User model
-  const newUser = await User.create(req.body);
   console.log("signupUser running...");
+  const newUser = await User.create(req.body);
 
   // 2) create url and send welcome email to new user
   // const url = `${req.protocol}://${req.get("host")}/me`;
@@ -21,6 +21,7 @@ module.exports.signupUser = async (req, res, next) => {
 
 // ANCHOR -- Login User --
 module.exports.loginUser = async (req, res, next) => {
+  console.log("running loginuser on backend");
   // 1) get all needed info from the body
   const { email, password } = req.body;
   // 2) check if email and password exist
@@ -105,14 +106,15 @@ module.exports.isLoggedIn = async (req, res, next) => {
       // 2) check if user still exists
       const user = await User.findById(decoded._id);
       if (!user) {
+        console.log("no user!");
         return next();
       }
       // 3) check if user changed password after the token was issued
-      if (user.changedPasswordAfter(decided.iat)) {
+      if (user.changedPasswordAfter(decoded.iat)) {
         return next();
       }
       // 4.A) there is a logged in user
-      res.locals.user = user;
+      res.locals.user = user; // this is what gives access to 'user' in the pug templates
       return next();
     } catch (err) {
       return next();

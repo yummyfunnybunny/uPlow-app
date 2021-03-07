@@ -15,19 +15,20 @@ block content
           form.signup-form#signupForm()
             h1.section-title signup
             label.form-label Name
-            input.form-input(placeholder="Name" type="text" name="" required maxlength="100")
+            input#nameInput.form-input(placeholder="Name" type="text" name="" required maxlength="100")
             label.form-label Email
-            input.form-input(placeholder="Email" type="text" name="" required maxlength="100")
+            input#emailInput.form-input(placeholder="Email" type="text" name="" required maxlength="100")
             label.form-label Password
-            input.form-input(placeholder="password" type="password" required minLength="8" maxLength='50')
+            input#passwordInput.form-input(placeholder="password" type="password" required minLength="8" maxLength='50')
             label.form-label Confirm Password
-            input.form-input(placeholder="Confirm Password" type="password" required minLength="8" maxLength='50')
+            input#passwordConfirmInput.form-input(placeholder="Confirm Password" type="password" required minLength="8" maxLength='50')
             label.form-label Choose Your Role
-            select#formSelect.form-select(name="form_select")
+            select#roleSelect.form-select(name="form_select")
               option(value="resident") Resident  
               option(value="plower") Plower  
               option(value="resident_plower") Resident and Plower  
             button.btn.form-submit Submit
+          a.btn.back-button(href="/") Back
           //- .signup-links
             //- a.forgot-password(href="#") I Forgot My Password
             //- a.forgot-email(href="#") I Forgot My Email

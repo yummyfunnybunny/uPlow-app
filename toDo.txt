@@ -2,6 +2,7 @@
 FRONT-END
 ================
 - build weather API (this may need to communicate with the back-end, not sure)
+  - make api get location from user automatically?
 - build content slider on hero page
 - build account content on hero page (may be able to do that now)
 - make link buttons on all pages work

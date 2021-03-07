@@ -10,7 +10,7 @@ const router = express.Router();
 // router.use(viewsController.alerts);
 
 // ANCHOR -- View Routes --
-router.get("/", viewsController.getHome);
+router.get("/", authController.isLoggedIn, viewsController.getHome);
 router.get("/login", viewsController.getLogin);
 router.get("/signup", viewsController.getSignup);
 router.get("/dashboard", viewsController.getDashboard);

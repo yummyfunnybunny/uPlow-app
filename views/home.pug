@@ -16,19 +16,72 @@ block content
             // your account info / login and signup button
            
             .account-info.sub-element
-              //- NOT LOGGED-IN:
-              h6 You are not logged in
-              a.btn.hero-login Login
-              a.btn.hero-login Signup
-              a.forgot-password I Forgot My Password
-              a.forgot-email I Forgot My Email
-              //- LOGGED-IN:
-              //- i.fas.fa-user-circle.sub-element
-              //- h6 YummyFunnyBunny
-              //- h6 Some Important Info
+              
+              if user
+                //- LOGGED-IN:
+                .account-portrait
+                  img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
+                .account-name
+                  span= user.name
+                .account-status
+                  span= user.status
+                .logout
+                  button.btn.logout-btn Logout
+                .account-messages
+                  i.fas.fa-comments
+                .account-alerts 
+                  i.fas.fa-exclamation-triangle
+                .account-dashboard
+                  i.fas.fa-address-card
+                .begin-work
+                  i.fas.fa-snowplow
+              
+              else
+                //- NOT LOGGED-IN:
+                h3 You are not logged in
+                .auth-buttons
+                  a.btn.hero-login(href="/login") Login
+                  a.btn.hero-login(href="/signup") Signup
+                .reset-links
+                  a.forgot-password I Forgot My Password
+                  a.forgot-email I Forgot My Email
+
           .hero-weather.element
             // weather info goes here
-            h1 Weather Info Goes Here
+            //- h1 Weather Info Goes Here
+            .weather-location
+              form.weather-form
+                input.city-input(placeholder="city")
+                //- input.state-input(placeholder="state")
+                //- input.country-input(placeholder="Country")
+                //- input.unit-input(placeholder="Unit")
+                select.unit-input(placeholder="°F")
+                  option(value="F") °F 
+                  option(value="C") °C
+                button.btn.submit-btn(type="submit") 
+                  i.fas.fa-search
+            .weather-daily
+              .weather-icon
+                img
+              .weather-info
+                .weather-description
+                  h3 Scattered Clouds
+                .weather-temp
+                  .weather-temp--max
+                    span.temp-label High 
+                    spa.temp-temp 
+                  .weather-temp--cur
+                    span.temp-label Current 
+                    spa.temp-temp 
+                  .weather-temp--min
+                    span.temp-label Low
+                    spa.temp-temp 
+              .weather-alerts
+            //- .weather-forecast
+            //-   .forecast1
+            //-   .forecast2
+            //-   .forecast3
+            //-   .forecast4
     //- ============
     //- ANCHOR FEATURES
     //- ============
