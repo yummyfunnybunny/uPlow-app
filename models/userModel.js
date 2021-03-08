@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema(
       enum: ["plower", "resident", "admin"],
       default: "resident",
     },
+    status: {
+      type: String,
+      enum: ["accepting work", "ready", "not ready", "unavailable"],
+      default: "ready",
+    },
     password: {
       type: String,
       required: [true, "User must create a valid password"],

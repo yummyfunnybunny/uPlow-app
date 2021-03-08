@@ -15,29 +15,34 @@ block content
           .hero-account.element
             // your account info / login and signup button
            
-            .account-info.sub-element
               
-              if user
-                //- LOGGED-IN:
+            if user
+              //- LOGGED-IN:
+              .account--logged-in.sub-element
                 .account-portrait
                   img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
-                .account-name
-                  span= user.name
-                .account-status
-                  span= user.status
-                .logout
-                  button.btn.logout-btn Logout
+                .hero-account-info
+                  .account-name
+                    span= user.name
+                  .account-actions
+                    .account-status
+                      span= user.status
+                    .logout
+                      button.btn.logout-btn Logout
+                .begin-work.btn
+                  i.fas.fa-snowplow
                 .account-messages
                   i.fas.fa-comments
                 .account-alerts 
                   i.fas.fa-exclamation-triangle
-                .account-dashboard
-                  i.fas.fa-address-card
-                .begin-work
+                .account-jobs
                   i.fas.fa-snowplow
-              
-              else
-                //- NOT LOGGED-IN:
+                .account-find
+                  i.fas.fa-search-location
+            
+            else
+              //- NOT LOGGED-IN:
+              .account--logged-out.sub-element
                 h3 You are not logged in
                 .auth-buttons
                   a.btn.hero-login(href="/login") Login
