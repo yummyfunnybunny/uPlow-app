@@ -19,7 +19,7 @@ block content
             if user
               //- LOGGED-IN:
               .account--logged-in.sub-element
-                .account-portrait
+                a.account-portrait(href="/dashboard")
                   img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
                 .hero-account-info
                   .account-name
@@ -28,16 +28,16 @@ block content
                     .account-status
                       span= user.status
                     .logout
-                      button.btn.logout-btn Logout
+                      a.btn.logout-btn Logout
                 .begin-work.btn
                   i.fas.fa-snowplow
-                .account-messages
+                a.account-messages(href="/dashboard-messages")
                   i.fas.fa-comments
-                .account-alerts 
+                a.account-alerts(href="/dashboard-alerts")
                   i.fas.fa-exclamation-triangle
-                .account-jobs
+                a.account-jobs(href="/dashboard-jobs")
                   i.fas.fa-snowplow
-                .account-find
+                a.account-find(href="/dashboard-find")
                   i.fas.fa-search-location
             
             else
@@ -90,7 +90,7 @@ block content
     //- ============
     //- ANCHOR FEATURES
     //- ============
-    section.section-features
+    section#features.section-features
       .container
         .features.content
           .section-title.element
@@ -120,7 +120,7 @@ block content
     //- ============
     //- ANCHOR Get Started
     //- ============
-    section.section-get-started
+    section#getStarted.section-get-started
       .container
         .get-started
           .section-title.element

@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const AppError = require("./Utilities/appError");
+const globalErrorHandler = require("./controllers/errorController");
 const helmet = require("helmet");
 const userRouter = require("./routes/userRoutes");
 const locationRouter = require("./routes/locationRoutes");
@@ -36,9 +38,10 @@ app.use(
         "blob:",
         "https://use.fontawesome.com/8877301646.js",
         "'unsafe-inline'",
+        "https://bundle.js:8828",
         "http://127.0.0.1:3000/js/weatherApi",
       ],
-      frameSrc: ["'self'"],
+      frameSrc: ["'self'", "https://bundle.js:*"],
       objectSrc: ["'none'"],
       styleSrc: [
         "'self'",
@@ -49,9 +52,9 @@ app.use(
         "https://use.fontawesome.com/releases/v4.7.0/css/font-awesome-css.min.css",
         "https://use.fontawesome.com/releases/v5.15.2/css/all.css",
       ],
-      workerSrc: ["'self'", "data:", "blob:"],
+      workerSrc: ["'self'", "data:", "blob:", "https://bundle.js:*"],
       childSrc: ["'self'", "blob:"],
-      imgSrc: ["'self'", "data:", "blob:"],
+      imgSrc: ["'self'", "data:", "blob:", "https://bundle.js:*"],
       formAction: ["'self'"],
       connectSrc: [
         "'self'",
@@ -60,6 +63,7 @@ app.use(
         "blob:",
         "https://api.openweathermap.org/*",
         "https://api.openweathermap.org/data/2.5/weather",
+        "https://bundle.js:*",
         "ws://127.0.0.1:*/",
       ],
       upgradeInsecureRequests: [],
@@ -91,6 +95,14 @@ app.use("/api/v1/locations", locationRouter);
 app.use("/api/v1/transactions", transactionRouter);
 app.use("/api/v1/plows", plowRouter);
 app.use("/api/v1/reviews", reviewRouter);
+
+// ANCHOR -- Handle Unhandled Routes --
+app.all("*", (req, res, next) => {
+  next(new AppError(`Cannot find ${req.originalUrl} on this server 🐟`, 404));
+});
+
+// ANCHOR --  Global Error Handler --
+app.use(globalErrorHandler);
 
 // ANCHOR -- Export --
 module.exports = app;

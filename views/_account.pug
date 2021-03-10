@@ -1,0 +1,41 @@
+.dashboard-account
+
+    //- .profile-info
+    h1 Profile Information
+    form#profileInfo
+      .info
+        .labels 
+          label.form-label Name
+          label.form-label Email
+          label.form-label Address
+          label.form-label Role
+
+        .inputs
+          input#nameInput.form-input(value=`${user.name}` type="text" name="" required maxlength="100")
+          input#emailInput.form-input(value=`${user.email}` type="text" name="" required maxlength="100")
+          input#addressInput.form-input(value=`${user.address}` type="text" name="" required maxlength="100")
+          select#roleInput.form-select(name="form_select" value=`${user.role}`)
+            option(value="resident") Resident  
+            option(value="plower") Plower  
+            option(value="resident_plower") Resident and Plower
+
+      .pic-container
+        img.form__user-photo(src=`/img/users/${user.photo}`, alt='User photo')
+        .new-pic
+          label(for='') Choose new photo
+          input.form__upload(type='file', accept='image/*', id='photoInput', name='photo')
+      button.btn.form-submit Save Changes
+
+    //- .password-reset
+    h1 Reset Your Password
+    form#passwordResetForm
+      .labels
+        label.form-label Current Password
+        label.form-label New Password
+        label.form-label Confirm New Password
+
+      .inputs
+        input#currentPassword.form-input(placeholder="Current Password" type="password" required minLength="8" maxLength='50')
+        input#passwordConfirmInput.form-input(placeholder="New Password" type="password" required minLength="8" maxLength='50')
+        input#passwordConfirmInput.form-input(placeholder="Confirm New Password" type="password" required minLength="8" maxLength='50')
+    button.btn.form-submit Reset Password

@@ -7,7 +7,13 @@ section.section-navbar
         i.fas.fa-snowplow.company-logo.sub-element
         h3.company-title.sub-element uPlow
       .nav-links.element
-        a.sub-element(href='#') Features
-        a.sub-element(href='#') Get Started
-        a.sub-element(href='#') About Us
-        a.sub-element(href='#') Contact
+        if homePage === true
+          a.sub-element(href='/#features') Features
+          a.sub-element(href='/#getStarted') Get Started
+          a.sub-element(href='#') About Us
+          a.sub-element(href='#') Contact
+        else if homePage === false
+          a.sub-element(href='/guide') Guide
+          a.sub-element(href='/support') Support
+          a.sub-element(href='/dashboard') Dashboard
+          a.logout-btn.sub-element logout

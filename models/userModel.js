@@ -75,9 +75,49 @@ const userSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Document Middle-Ware ==
+
+// ANCHOR --  Password Hashing --
+userSchema.pre("save", async function (next) {
+  // only run this middleware if a password has been created or updated
+  if (!this.isModified("password")) {
+    return next();
+  }
+  // Hash the password using bCrypt
+  this.password = await bcrypt.hash(this.password, 12);
+
+  // this line basically deletes the passwordConfirm field, since we only needed it at the very begining
+  this.passwordConfirm = undefined;
+
+  // proceed to next middleware
+  next();
+});
+
+// ANCHOR --  Set PasswordChangedAt --
+userSchema.pre("save", function (next) {
+  // check if the password was modified or just created
+  if (!this.isModified("password") || this.isNew) {
+    return next();
+  }
+  // set the timeStamp
+  this.passwordChangedAt = Date.now() - 1000;
+
+  // proceed to next middleware
+  next();
+});
+
 // !SECTION
 
 // SECTION == Query Middle-Ware ==
+
+// ANCHOR -- Remove Inactive Users From Query --
+// /^find/ - we use a regular expression here to include any function with the word 'find' in it
+// this will now run for find, findById, findByIdAndUpdate, etc.
+userSchema.pre(/^find/, function (next) {
+  // 'this' points to the current query object
+  this.find({ active: { $ne: false } });
+  next();
+});
+
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==
@@ -88,35 +128,51 @@ const userSchema = new mongoose.Schema(
 
 // SECTION == Instance Methods ==
 
-// ANCHOR -- ChangedPasswordAfter --
-// checks if the password was changed after the current jwt was issued
-userSchema.methods.changedPasswordAfter = function (jwtTimeStamp) {
+// ANCHOR -- Correct Password --
+// -- used by: authController.login, authController.updatePassword
+// we will use bcrypt here to compare the input password from a user trying to login with the hashed password in the DB
+userSchema.methods.correctPassword = async function (
+  inputPassword,
+  hashedPassword
+) {
+  return await bcrypt.compare(inputPassword, hashedPassword);
+};
+
+// ANCHOR -- Changed Password After --
+// this function checks if the user has ever changed their password after initial creation
+userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
   if (this.passwordChangedAt) {
-    // NOTE I need clarification on parseInt and .getTime()
+    // 'this' points to the current document
     const changedTimeStamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
       10
     );
-    // true means that password was changed
-    return jwtTimeStamp < changedTimeStamp;
+    //console.log(this.passwordChangedAt, JWTTimeStamp);
+    return JWTTimeStamp < changedTimeStamp;
   }
   // false means password was never changed
   return false;
 };
 
 // ANCHOR -- Create Password Reset Token --
-userSchema.methods.correctPassword = function () {
-  // 1) create random token number, 32 characters long, saved as a hexadecimal
+// -- used by: authController.forgotPassword
+// creates and sends a reset token to the user for resetting their password (lasts 10 minutes)
+userSchema.methods.createPasswordResetToken = function () {
+  // create a random token number, 32 characters long, saved as a hexadecimal
   const resetToken = crypto.randomBytes(32).toString("hex");
-  // 2) hash the resetToken using 'sha256 encryption algorithm', saved as hexadecimal
+
+  // hash the resetToken using 'sha256 encryption algorithm', saved as a hexadecimal
   this.passwordResetToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
-  // 3) set expiration of password rest token to 10 minutes (converting from miliseconds)
-  // NOTE may want to turn this amount of time into a variable later
+
+  //console.log({ resetToken }, this.passwordResetToken);
+
+  // set the expiration of the password reset token to 10 minutes (converting from miliseconds)
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-  // 4) Return the reset token
+
+  // return the reset token
   return resetToken;
 };
 

@@ -1,12 +1,4 @@
-//- ANCHOR -- Extends & Includes --
 extends base
-
-//- ANCHOR -- Header Block -- 
-//- block append head
-//- block append head
-  link(rel='stylesheet' href='/css/login.css')
-
-//- ANCHOR -- Content Block -- 
 
 block content
   section.section-dashboard
@@ -14,74 +6,75 @@ block content
         .dashboard.content
           .dashboard-menu
             .menu-account
-              i.fas.fa-user-circle
+              //- i.fas.fa-user-circle
+              img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
               .account-info
-                h6.account-info--title yummyfunnybunny
-                h6.account-info--status Ready
+                .account-info--title
+                  span= user.name
+                h6.account-info--status
+                  span= user.status
             .menu-options
               //- button.btn BEGIN PLOWING
               ul 
                 li
-                  i.fas.fa-comments    
-                  p Messages
+                  a.show-messages(href='/dashboard-messages')
+                    i.fas.fa-comments    
+                    p Messages
                 li 
-                  i.fas.fa-exclamation-triangle    
-                  p Alerts
+                  a.show-alerts(href='/dashboard-alerts')
+                    i.fas.fa-exclamation-triangle    
+                    p Alerts
                 li 
-                  i.fas.fa-snowplow   
-                  p Your Jobs
+                  a.show-jobs(href='/dashboard-jobs')
+                    i.fas.fa-snowplow   
+                    p Your Jobs
                 li 
-                  i.fas.fa-map-marked-alt   
-                  p Routes
+                  a.show-routes(href='/dashboard-routes')
+                    i.fas.fa-map-marked-alt   
+                    p Routes
                 li 
-                  i.fas.fa-search-location    
-                  p Find Work 
+                  a.show-find(href='/dashboard-find')
+                    i.fas.fa-search-location    
+                    p Find Work 
                 li  
-                  i.fas.fa-cloud-showers-heavy  
-                  p Weather
+                  a.show-weather(href='/dashboard-weather')
+                    i.fas.fa-cloud-showers-heavy  
+                    p Weather
                 li 
-                  i.fas.fa-user-circle    
-                  p Account
+                  a.show-account(href='/dashboard-account')
+                    i.fas.fa-user-circle    
+                    p Account
                 li 
-                  i.fas.fa-receipt    
-                  p Payments
+                  a.show-payments(href='/dashboard-payments')
+                    i.fas.fa-receipt    
+                    p Payments
                 li 
-                  i.fas.fa-tools  
-                  p Settings
+                  a.show-settings(href='/dashboard-settings')
+                    i.fas.fa-tools  
+                    p Settings
           .dashboard-content
             //- h1.section-title.dashboard-title Title
             //- h3 Dashboard Content Will Go Here
             block dashboard-content
-              .dashboard-alerts
-                .alert
-                  i.fas.fa-times-circle
-                  .alert-picture
-                    i.fas.fa-heart
-                  .alert-info 
-                    h4.alert-title Alert Title
-                    .alert-message Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia corrupti et consequatur beatae asperiores vitae, perferendis dignissimos animi repellendus, id commodi esse harum corporis aliquam magnam voluptatum quisquam voluptates ut aut itaque? Iste autem quidem asperiores itaque rem sint.
-                .alert
-                  i.fas.fa-times-circle
-                  .alert-picture
-                    i.fas.fa-heart
-                  .alert-info 
-                    h4.alert-title Alert Title
-                    .alert-message Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia corrupti et consequatur beatae asperiores vitae, perferendis dignissimos animi repellendus, id commodi esse harum corporis aliquam magnam voluptatum quisquam voluptates ut aut itaque? Iste autem quidem asperiores itaque rem sint.
-                .alert
-                  i.fas.fa-times-circle
-                  .alert-picture
-                    i.fas.fa-heart
-                  .alert-info 
-                    h4.alert-title Alert Title
-                    .alert-message Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia corrupti et consequatur beatae asperiores vitae, perferendis dignissimos animi repellendus, id commodi esse harum corporis aliquam magnam voluptatum quisquam voluptates ut aut itaque? Iste autem quidem asperiores itaque rem sint.
-                .alert
-                  i.fas.fa-times-circle
-                  .alert-picture
-                    i.fas.fa-heart
-                  .alert-info 
-                    h4.alert-title Alert Title
-                    .alert-message Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus officia corrupti et consequatur beatae asperiores vitae, perferendis dignissimos animi repellendus, id commodi esse harum corporis aliquam magnam voluptatum quisquam voluptates ut aut itaque? Iste autem quidem asperiores itaque rem sint.
-
+              if messages === true
+                include _messages
+              else if alerts === true
+                include _alerts
+              else if alerts === true
+                include _alerts
+              else if jobs === true
+                include _routes
+              else if find === true
+                include _find
+              else if weather === true
+                include _weather
+              else if account === true
+                include _account
+              else if payments === true
+                include _payments
+              else if settings === true
+                include _settings
+                
             
 
 

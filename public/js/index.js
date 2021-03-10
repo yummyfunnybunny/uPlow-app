@@ -3,11 +3,14 @@ import "@babel/polyfill";
 import { getWeather, renderWeatherData } from "./weatherApi";
 import { login, logout } from "./login";
 import { signup } from "./signup";
+import { updateSettings } from "./updateSettings";
 
 // Element Selectors
 const weatherWidget = document.querySelector(".hero-weather");
 const loginForm = document.querySelector("#loginForm");
 const signupForm = document.querySelector(".signup-form");
+const logoutBtn = document.querySelector(".logout-btn");
+const profileInfoForm = document.getElementById("profileInfo");
 
 // ANCHOR -- Weather Widget --
 if (weatherWidget) {
@@ -46,6 +49,7 @@ if (weatherWidget) {
   });
 }
 
+// ANCHOR -- Login Form --
 if (loginForm) {
   console.log("form exists");
   loginForm.addEventListener("submit", (e) => {
@@ -57,6 +61,7 @@ if (loginForm) {
   });
 }
 
+// ANCHOR -- Signup Form --
 if (signupForm) {
   console.log("signup form exists");
   signupForm.addEventListener("submit", (e) => {
@@ -69,5 +74,26 @@ if (signupForm) {
       .value;
     const role = document.querySelector("#roleSelect").value;
     signup(name, email, password, passwordConfirm, role);
+  });
+}
+
+// ANCHOR -- Logout Button --
+if (logoutBtn) {
+  console.log("logout btn clicked");
+  logoutBtn.addEventListener("click", logout);
+}
+
+// ANCHOR -- Profile Info Form
+if (profileInfoForm) {
+  profileInfoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("name", document.getElementById("nameInput").value);
+    form.append("email", document.getElementById("emailInput").value);
+    form.append("address", document.getElementById("addressInput").value);
+    form.append("role", document.getElementById("roleInput").value);
+    form.append("photo", document.getElementById("photoInput").files[0]);
+    console.log("🚀 submitting profile info 🚀");
+    updateSettings(form, "data");
   });
 }

@@ -2,6 +2,8 @@
 const User = require("../Models/userModel");
 const multer = require("multer");
 const sharp = require("sharp");
+const catchAsync = require("../Utilities/catchAsync");
+const AppError = require("../Utilities/appError");
 
 // ANCHOR -- Multer Setup --
 // 1) Initialize Multer
@@ -28,7 +30,7 @@ const upload = multer({
 // ANCHOR -- Multer --
 module.exports.uploadUserPhoto = upload.single("photo");
 
-module.exports.resizeUserPhoto = async (req, res, next) => {
+module.exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   // continue to the next middleware if there is no photo
   if (!req.file) return next();
 
@@ -44,17 +46,34 @@ module.exports.resizeUserPhoto = async (req, res, next) => {
     .toFile(`public/img/users/${req.file.filename}`);
 
   next();
-};
+});
 
 // ANCHOR -- Get Me --
-module.exports.getMe = (req, res, next) => {
-  req.params.id = req.user.id;
-  next();
-};
+// module.exports.getMe = (req, res, next) => {
+//   req.params.id = req.user.id;
+//   next();
+// };
 
 // !SECTION
 
 // SECTION == Functions ==
+
+// ANCHOR -- Filter Request --
+const filterObj = (reqBody, ...allowedFields) => {
+  //  create empty object that will contain the final filtered fields
+  const newObj = {};
+
+  // loop through the reqBody keys...
+  Object.keys(reqBody).forEach((el) => {
+    // for each key in the reqBody, if they match one of the allowed fields...
+    if (allowedFields.includes(el)) {
+      // add that field to the newObj
+      newObj[el] = reqBody[el];
+    }
+  });
+  // return the newObj that now only contains allowed fields
+  return newObj;
+};
 
 // ANCHOR -- Get All Users --
 module.exports.getAllUsers = async (req, res, next) => {
@@ -140,13 +159,14 @@ module.exports.deleteUser = async (req, res, next) => {
 
 // ANCHOR -- Update Me --
 module.exports.updateMe = async (req, res, next) => {
+  console.log("running updateMe...");
   // 1) create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
-    console.log("❌ User tried posting password info in updateme ❌");
+    // console.log("❌ User tried posting password info in updateme ❌");
+    return next(new AppError(`Incorrect Inputs. Try again.`, 400));
   }
   // 2) filter out unwated fields that we dont want to update
-
-  const filteredBody = filterObj(req.body, "name", "email");
+  const filteredBody = filterObj(req.body, "name", "email", "address", "role");
   // 3) add new image if one exists
   if (req.file) {
     filteredBody.photo = req.file.filename;
@@ -175,22 +195,6 @@ module.exports.deleteMe = async (req, res, next) => {
     status: "success",
     data: null,
   });
-};
-
-// ANCHOR -- Filter Request --
-const filterObj = (reqBody, ...allowedFields) => {
-  //  create empty object that will contain the final filtered fields
-  const newObj = {};
-  // loop through the reqBody keys...
-  Object.keys(reqBody).forEach((el) => {
-    // for each key in the reqBody, if they match one of the allowed fields...
-    if (allowedFields.includes(el)) {
-      // add that field to the newObj
-      newObj[el] = reqBody[el];
-    }
-  });
-  // return the newObj that now only contains allowed fields
-  return newObj;
 };
 
 // !SECTION

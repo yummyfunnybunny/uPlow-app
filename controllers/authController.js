@@ -3,6 +3,8 @@ const User = require("../Models/userModel");
 const { promisify } = require("util"); // built-in node module
 const Email = require("../Utilities/email");
 const jwt = require("jsonwebtoken");
+const catchAsync = require("../Utilities/catchAsync");
+const AppError = require("../Utilities/appError");
 const crypto = require("crypto");
 
 // ANCHOR -- Signup User --
@@ -21,19 +23,20 @@ module.exports.signupUser = async (req, res, next) => {
 
 // ANCHOR -- Login User --
 module.exports.loginUser = async (req, res, next) => {
-  console.log("running loginuser on backend");
   // 1) get all needed info from the body
   const { email, password } = req.body;
   // 2) check if email and password exist
   if (!email || !password) {
-    console.log("❌ Login user failed: email or password does not exist ❌");
+    // console.log("❌ Login user failed: email or password does not exist ❌");
+    return next(new AppError("Please provide email and password!", 400));
   }
   // 3) Check if user exists via email and if password matches
   const user = await User.findOne({ email: email }).select("password");
   if (!user || !(await user.correctPassword(password, user.password))) {
-    console.log(
-      "❌ Login failed: user does not exist or password was incorrect ❌"
-    );
+    // console.log(
+    //   "❌ Login failed: user does not exist or password was incorrect ❌"
+    // );
+    return next(new AppError("Incorrect Email or password", 401));
   }
   // 4) send token to client
   createSendToken(user, 200, req, res);
@@ -41,11 +44,14 @@ module.exports.loginUser = async (req, res, next) => {
 
 // ANCHOR -- Logout User --
 module.exports.logoutUser = (req, res) => {
+  console.log("logoutUser 1");
   // 1) send cookie labelled 'loggedout' to client that will expire immediately
   res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now()),
+    // expires: new Date(Date.now()),
+    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
+  console.log("logoutUser 2");
   // 2) send success response
   res.status(200).json({
     status: "successfully logged out",
@@ -207,7 +213,8 @@ module.exports.updatePassword = async (req, res, next) => {
   const user = await User.findOne(req.user._id).select("+password");
   // 2) check if POSTed password is correct
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-    console.log("💥 passwords do not match 💥");
+    // console.log("💥 passwords do not match 💥");
+    new AppError("Incorrect Current Password", 401); // 401 = unauthorized
   }
   // 3) update the password
   user.password = req.body.newPassword;
@@ -226,6 +233,9 @@ const createSendToken = (user, statusCode, req, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
+    //secure: true, // this means the cookie will only be sent via encrypted connection (https)
+    httpOnly: true, // this means the cookie cannot be accessed or modifed in anyway by the browser (precents cross-side-scripting attacks)
+    secure: req.secure || req.headers["x-forwarded-proto"] === "https",
   });
   // 3) set password to undefined so it does not show up in the response to the client
   user.password = undefined;

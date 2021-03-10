@@ -1,5 +1,7 @@
 // ANCHOR -- Require Modules --
 const Review = require("../Models/reviewModel");
+const catchAsync = require("../Utilities/catchAsync");
+const AppError = require("../Utilities/appError");
 
 // SECTION == Middleware ==
 // !SECTION
@@ -7,7 +9,7 @@ const Review = require("../Models/reviewModel");
 // SECTION == Functions ==
 
 // ANCHOR -- Get All Reviews --
-module.exports.getAllReviews = async (req, res, next) => {
+module.exports.getAllReviews = catchAsync(async (req, res, next) => {
   // 1) Get all reviews in DB
   const reviews = await Review.find();
   // 2) show error message if no review was found
@@ -18,10 +20,10 @@ module.exports.getAllReviews = async (req, res, next) => {
     results: reviews.length,
     data: reviews,
   });
-};
+});
 
 // ANCHOR -- Create Review --
-module.exports.createReview = async (req, res, next) => {
+module.exports.createReview = catchAsync(async (req, res, next) => {
   // 1) Create review in DB
   const review = await Review.create(req.body);
   // 2) show error message if no review was found
@@ -31,10 +33,10 @@ module.exports.createReview = async (req, res, next) => {
     status: "successfully created review",
     data: review,
   });
-};
+});
 
 // ANCHOR -- Get Review By ID --
-module.exports.getReview = async (req, res, next) => {
+module.exports.getReview = catchAsync(async (req, res, next) => {
   // 1) Find review in DB
   const review = await Review.findById(req.params.id);
   // 2) show error message if no review was found
@@ -44,10 +46,10 @@ module.exports.getReview = async (req, res, next) => {
     status: "successfully found review",
     data: review,
   });
-};
+});
 
 // ANCHOR -- Update Review --
-module.exports.updateReview = async (req, res, next) => {
+module.exports.updateReview = catchAsync(async (req, res, next) => {
   // 1) Find review in DB and update it
   const review = await Review.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -60,10 +62,10 @@ module.exports.updateReview = async (req, res, next) => {
     status: "successfully updated review",
     data: review,
   });
-};
+});
 
 // ANCHOR -- Delete Review --
-module.exports.deleteReview = async (req, res, next) => {
+module.exports.deleteReview = catchAsync(async (req, res, next) => {
   // 1) find review in DB and delete
   const review = await Review.findByIdAndRemove(req.params.id);
   // 2) show error message if no review was found
@@ -73,5 +75,5 @@ module.exports.deleteReview = async (req, res, next) => {
     status: "successfully deleted review",
     data: review,
   });
-};
+});
 // !SECTION

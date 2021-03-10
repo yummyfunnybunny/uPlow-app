@@ -25,7 +25,7 @@ export const login = async (email, password) => {
     }
     // 3) log error if login was unsuccessful
   } catch (err) {
-    console.log(err);
+    // console.log(`POOP: ${err}`);
     showToast("error", err.response.data.message);
   }
 };
@@ -38,11 +38,15 @@ export const logout = async () => {
       method: "GET",
       url: "/api/v1/users/logout",
     });
-    if (result.data.status === "success") {
-      location.assign("/");
+    // 2) send success response and redirect to home page
+    if (result.data.status === "successfully logged out") {
+      console.log("logout successful");
+      showToast("success", "Logout Successful!");
+      setTimeout(() => {
+        location.assign("/");
+      }, 1500);
     }
   } catch (err) {
-    console.log(err.response);
     showToast("error", "Error logging out! Try again...");
   }
 };

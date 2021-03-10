@@ -1,5 +1,7 @@
 // ANCHOR -- Require Modules --
 const Plow = require("../Models/plowModel");
+const catchAsync = require("../Utilities/catchAsync");
+const AppError = require("../Utilities/appError");
 
 // SECTION == Middleware ==
 // !SECTION
@@ -7,7 +9,7 @@ const Plow = require("../Models/plowModel");
 // SECTION == Functions ==
 
 // ANCHOR -- Get All Plows --
-module.exports.getAllPlows = async (req, res, next) => {
+module.exports.getAllPlows = catchAsync(async (req, res, next) => {
   // 1) Get all plows in DB
   const plows = await Plow.find();
   // 2) show error message if no location was found
@@ -18,10 +20,10 @@ module.exports.getAllPlows = async (req, res, next) => {
     results: plows.length,
     data: plows,
   });
-};
+});
 
 // ANCHOR -- Create Plow --
-module.exports.createPlow = async (req, res, next) => {
+module.exports.createPlow = catchAsync(async (req, res, next) => {
   // 1) Create new plow in DB
   const plow = await Plow.create(req.body);
   // 2) show error message if no plow was found
@@ -31,10 +33,10 @@ module.exports.createPlow = async (req, res, next) => {
     status: "Successfully created plow",
     data: plow,
   });
-};
+});
 
 // ANCHOR -- Get Plow --
-module.exports.getPlow = async (req, res, next) => {
+module.exports.getPlow = catchAsync(async (req, res, next) => {
   // 1) Find plow in DB
   const plow = await Plow.findById(req.params.id);
   // 2) show error message if no plow was found
@@ -44,10 +46,10 @@ module.exports.getPlow = async (req, res, next) => {
     status: "Successfully created plow",
     data: plow,
   });
-};
+});
 
 // ANCHOR -- Update Plow --
-module.exports.updatePlow = async (req, res, next) => {
+module.exports.updatePlow = catchAsync(async (req, res, next) => {
   // 1) Find plow in DB and update
   const plow = await Plow.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -60,10 +62,10 @@ module.exports.updatePlow = async (req, res, next) => {
     status: "Successfully updated plow",
     data: plow,
   });
-};
+});
 
 // ANCHOR -- Delete Plow --
-module.exports.deletePlow = async (req, res, next) => {
+module.exports.deletePlow = catchAsync(async (req, res, next) => {
   // 1) Find plow in DB and delete
   const plow = await Plow.findByIdAndRemove(req.params.id);
   // 2) show error message if no plow was found
@@ -73,5 +75,5 @@ module.exports.deletePlow = async (req, res, next) => {
     status: "Successfully deleted plow",
     data: plow,
   });
-};
+});
 // !SECTION

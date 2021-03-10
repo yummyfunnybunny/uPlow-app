@@ -21,7 +21,13 @@ export const getWeather = async (
     const { temp, temp_min, temp_max } = data.data.main;
     // console.log({ temp }, { temp_min }, { temp_max });
     const { description, icon } = data.data.weather[0];
-    // console.log({ description }, { icon });
+    console.log(
+      { description },
+      { icon },
+      { temp },
+      { temp_min },
+      { temp_max }
+    );
     return { description, icon, temp, temp_min, temp_max };
 
     // Error handling

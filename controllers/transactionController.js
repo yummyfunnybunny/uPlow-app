@@ -1,5 +1,7 @@
 // ANCHOR -- Require Modules --
 const Transaction = require("../Models/transactionModel");
+const catchAsync = require("../Utilities/catchAsync");
+const AppError = require("../Utilities/appError");
 
 // SECTION == Middleware ==
 // !SECTION
@@ -7,7 +9,7 @@ const Transaction = require("../Models/transactionModel");
 // SECTION == Functions ==
 
 // ANCHOR -- Get All Transactions --
-module.exports.getAllTransactions = async (req, res, next) => {
+module.exports.getAllTransactions = catchAsync(async (req, res, next) => {
   // 1) Get all transactions in DB
   const transactions = await Transaction.find();
   // 2) show error message if no transaction was found
@@ -18,10 +20,10 @@ module.exports.getAllTransactions = async (req, res, next) => {
     results: transactions.length,
     data: transactions,
   });
-};
+});
 
 // ANCHOR -- Create Transaction --
-module.exports.createTransaction = async (req, res, next) => {
+module.exports.createTransaction = catchAsync(async (req, res, next) => {
   // 1) Create transaction in DB
   const transaction = await Transaction.create(req.body);
   // 2) show error message if no transaction was found
@@ -31,10 +33,10 @@ module.exports.createTransaction = async (req, res, next) => {
     status: "successfully created transaction",
     data: transaction,
   });
-};
+});
 
 // ANCHOR -- Get Transaction By ID --
-module.exports.getTransaction = async (req, res, next) => {
+module.exports.getTransaction = catchAsync(async (req, res, next) => {
   // 1) Find transaction in DB
   const transaction = await Transaction.findById(req.params.id);
   // 2) show error message if no transaction was found
@@ -44,10 +46,10 @@ module.exports.getTransaction = async (req, res, next) => {
     status: "successfully found transaction",
     data: transaction,
   });
-};
+});
 
 // ANCHOR -- Update Transaction --
-module.exports.updateTransaction = async (req, res, next) => {
+module.exports.updateTransaction = catchAsync(async (req, res, next) => {
   // 1) Find transaction in DB and update it
   const transaction = await Transaction.findByIdAndUpdate(
     req.params.id,
@@ -64,10 +66,10 @@ module.exports.updateTransaction = async (req, res, next) => {
     status: "successfully updated transaction",
     data: transaction,
   });
-};
+});
 
 // ANCHOR -- Delete Transaction --
-module.exports.deleteTransaction = async (req, res, next) => {
+module.exports.deleteTransaction = catchAsync(async (req, res, next) => {
   // 1) find transaction in DB and delete
   const transaction = await Transaction.findByIdAndRemove(req.params.id);
   // 2) show error message if no transaction was found
@@ -77,5 +79,5 @@ module.exports.deleteTransaction = async (req, res, next) => {
     status: "successfully deleted transaction",
     data: transaction,
   });
-};
+});
 // !SECTION
