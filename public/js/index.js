@@ -5,6 +5,7 @@ import { login, logout } from "./login";
 import { signup } from "./signup";
 import { updateSettings } from "./updateSettings";
 import { carouselController } from "./carousel";
+import { displayMap } from "./mapbox";
 
 // Element Selectors
 const weatherWidget = document.querySelector(".hero-weather");
@@ -13,12 +14,13 @@ const signupForm = document.querySelector(".signup-form");
 const logoutBtn = document.querySelector(".logout-btn");
 const profileInfoForm = document.getElementById("profileInfo");
 const carousel = document.querySelector(".hero-carousel");
+const yourJobs = document.querySelector(".dashboard-jobs");
+const mapbox = document.querySelector(".map");
+const toggleExpand = document.querySelector(".toggle-expand");
 
 if (carousel) {
-  console.log("we out");
   carouselController();
 } else {
-  console.log("we not out");
 }
 
 // ANCHOR -- Weather Widget --
@@ -41,7 +43,6 @@ if (weatherWidget) {
   const weatherForm = document.querySelector(".weather-form");
   weatherForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log("weather form submitted");
     // 1) Get user input info
     const unitInput =
       document.querySelector(".unit-input").value === "F"
@@ -57,9 +58,7 @@ if (weatherWidget) {
 
 // ANCHOR -- Login Form --
 if (loginForm) {
-  console.log("form exists");
   loginForm.addEventListener("submit", (e) => {
-    console.log("form submitting");
     e.preventDefault();
     const email = document.querySelector("#emailInput").value;
     const password = document.querySelector("#passwordInput").value;
@@ -69,9 +68,7 @@ if (loginForm) {
 
 // ANCHOR -- Signup Form --
 if (signupForm) {
-  console.log("signup form exists");
   signupForm.addEventListener("submit", (e) => {
-    console.log("signup form submitting");
     e.preventDefault();
     const name = document.querySelector("#nameInput").value;
     const email = document.querySelector("#emailInput").value;
@@ -85,7 +82,6 @@ if (signupForm) {
 
 // ANCHOR -- Logout Button --
 if (logoutBtn) {
-  console.log("logout btn clicked");
   logoutBtn.addEventListener("click", logout);
 }
 
@@ -102,4 +98,33 @@ if (profileInfoForm) {
     console.log("🚀 submitting profile info 🚀");
     updateSettings(form, "data");
   });
+}
+
+if (toggleExpand) {
+  toggleExpand.addEventListener("click", () => {
+    // Switch the chevron icon
+    if (toggleExpand.firstChild.classList.contains("fa-chevron-down")) {
+      toggleExpand.firstChild.classList.remove("fa-chevron-down");
+      toggleExpand.firstChild.classList.add("fa-chevron-up");
+    } else {
+      toggleExpand.firstChild.classList.add("fa-chevron-down");
+      toggleExpand.firstChild.classList.remove("fa-chevron-up");
+    }
+    // Toggle hidden on job elements
+    const elements = toggleExpand.parentElement.children;
+    for (let i = 0; i < elements.length - 1; i++) {
+      if (
+        elements[i].classList.contains("image-galery") ||
+        elements[i].classList.contains("notes") ||
+        // elements[i].classList.contains("map") ||
+        elements[i].classList.contains("actions")
+      ) {
+        elements[i].classList.toggle("hidden");
+      }
+    }
+  });
+}
+
+if (mapbox) {
+  displayMap();
 }

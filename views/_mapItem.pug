@@ -1,0 +1,39 @@
+.map-item
+    .top 
+      img(src='https://picsum.photos/300/200')
+      //- img(src=`/img/locations/${location.coverImage}` alt=`cover image for ${location.name}`)
+      .meta-info
+        //- h1=location.name
+        h1 Location Name
+        div
+          i.fas.fa-snowflake
+          i.fas.fa-snowflake
+          i.fas.fa-snowflake
+          i.fas.fa-snowflake
+          i.fas.fa-snowflake
+        .owner-info
+          img(src='https://picsum.photos/50')
+          span Owner Name
+          //- img=location.owner.photo
+          //- span=location.owner.name
+    .image-galery.hidden
+      img(src='https://picsum.photos/100')
+      img(src='https://picsum.photos/100')
+      img(src='https://picsum.photos/100')
+      img(src='https://picsum.photos/100')
+      img(src='https://picsum.photos/100')
+      //- img(src=`/img/locations/${location.images[1]}` alt=`image of ${location.name}`)
+      //- img(src=`/img/locations/${location.images[2]}` alt=`image of ${location.name}`)
+      //- img(src=`/img/locations/${location.images[3]}` alt=`image of ${location.name}`)
+      //- img(src=`/img/locations/${location.images[4]}` alt=`image of ${location.name}`)
+      //- img(src=`/img/locations/${location.images[5]}` alt=`image of ${location.name}`)
+    .notes.hidden
+      h2 Instructions and Notes
+      ul
+        li Please watch out for the dog toys in the driveway 
+        li please plow all the way up to the side of the garage
+    .actions.hidden
+      button.btn Send Message
+      button.btn Cancel Job
+    button.toggle-expand
+      i.fas.fa-chevron-down

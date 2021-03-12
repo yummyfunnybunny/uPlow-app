@@ -22,3 +22,8 @@ BACK-END
 -
 
 
+================
+FIND WORK
+================
+- when the page loads, we need to retreive location data WITHIN a certain range
+-

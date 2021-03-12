@@ -1,41 +1,7 @@
-.dashboard-jobs
-  .job
-    .top 
-      img(src='https://picsum.photos/300/200')
-      //- img(src=`/img/locations/${location.coverImage}` alt=`cover image for ${location.name}`)
-      .job-meta-info
-        //- h1=location.name
-        h1 Location Name
-        div
-          i.fas.fa-snowflake
-          i.fas.fa-snowflake
-          i.fas.fa-snowflake
-          i.fas.fa-snowflake
-          i.fas.fa-snowflake
-        .job-owner-info
-          img(src='https://picsum.photos/50')
-          span Owner Name
-          //- img=location.owner.photo
-          //- span=location.owner.name
-    .image-galery
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      //- img(src=`/img/locations/${location.images[1]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[2]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[3]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[4]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[5]}` alt=`image of ${location.name}`)
-    .map
-    .notes
-      h3 Instructions and Notes
-      ul
-        li Please watch out for the dog toys in the driveway 
-        li please plow all the way up to the side of the garage
-    .actions
-      button.btn Send Message
-      button.btn Cancel Job
-    button.toggleExpand
-      i.fas.fa-chevron-up
+block append head
+  script(src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js')
+  link(href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet')
+
+.dashboard-find
+  #map.map
+  include _mapItem

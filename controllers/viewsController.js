@@ -6,6 +6,8 @@ const Transaction = require("../Models/transactionModel");
 const catchAsync = require("../Utilities/catchAsync");
 const AppError = require("../Utilities/appError");
 const { getWeather, getUnit } = require("../utilities/openWeatherApi");
+const { getLocationsWithin } = require("./locationController");
+const axios = require("axios");
 
 // SECTION == Middleware ==
 // !SECTION
@@ -78,6 +80,8 @@ exports.getDashboardAlerts = (req, res, next) => {
 exports.getDashboardJobs = (req, res, next) => {
   const homePage = false;
   const jobs = true;
+  // TODO get list of jobs from the DB
+  // TODO get location of these jobs as well for the map
   res.status(200).render("dashboard", {
     title: "Dashboard | uPlow",
     homePage: homePage,
@@ -95,7 +99,7 @@ exports.getDashboardRoutes = (req, res, next) => {
   });
 };
 // ANCHOR -- Dashboard Find Work --
-exports.getDashboardFind = (req, res, next) => {
+exports.getDashboardFind = async (req, res, next) => {
   const homePage = false;
   const find = true;
   res.status(200).render("dashboard", {
@@ -104,6 +108,7 @@ exports.getDashboardFind = (req, res, next) => {
     find: find,
   });
 };
+
 // ANCHOR -- Dashboard Weather --
 exports.getDashboardWeather = (req, res, next) => {
   const homePage = false;

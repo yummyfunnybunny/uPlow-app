@@ -81,6 +81,9 @@ const locationSchema = new mongoose.Schema(
 );
 
 // SECTION == Create Indexes ==
+
+locationSchema.index({ location: "2dsphere" }); // geospatial data needs to be defined as either '2dsphere' or '2d'
+
 // !SECTION
 
 // SECTION == Virtual Properties ==
