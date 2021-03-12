@@ -5,6 +5,7 @@ const Review = require("../Models/reviewModel");
 const Transaction = require("../Models/transactionModel");
 const catchAsync = require("../Utilities/catchAsync");
 const AppError = require("../Utilities/appError");
+const { getWeather, getUnit } = require("../utilities/openWeatherApi");
 
 // SECTION == Middleware ==
 // !SECTION
@@ -46,9 +47,11 @@ exports.getSupport = (req, res, next) => {
 // ANCHOR -- Dashboard --
 exports.getDashboard = (req, res, next) => {
   const homePage = false;
+  const dashboard = true;
   res.status(200).render("dashboard", {
     title: "Dashboard | uPlow",
     homePage: homePage,
+    dashboard: dashboard,
   });
 };
 // ANCHOR -- Dashboard Messages --

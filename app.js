@@ -54,7 +54,7 @@ app.use(
       ],
       workerSrc: ["'self'", "data:", "blob:", "https://bundle.js:*"],
       childSrc: ["'self'", "blob:"],
-      imgSrc: ["'self'", "data:", "blob:", "https://bundle.js:*"],
+      imgSrc: ["*", "'self'", "data:", "blob:", "https://bundle.js:*"],
       formAction: ["'self'"],
       connectSrc: [
         "'self'",

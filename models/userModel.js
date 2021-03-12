@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema(
       enum: ["accepting work", "ready", "not ready", "unavailable"],
       default: "ready",
     },
+    committedJobs: {
+      type: String,
+      default: [],
+    },
     password: {
       type: String,
       required: [true, "User must create a valid password"],

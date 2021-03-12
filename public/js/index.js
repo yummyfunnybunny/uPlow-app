@@ -4,6 +4,7 @@ import { getWeather, renderWeatherData } from "./weatherApi";
 import { login, logout } from "./login";
 import { signup } from "./signup";
 import { updateSettings } from "./updateSettings";
+import { carouselController } from "./carousel";
 
 // Element Selectors
 const weatherWidget = document.querySelector(".hero-weather");
@@ -11,14 +12,20 @@ const loginForm = document.querySelector("#loginForm");
 const signupForm = document.querySelector(".signup-form");
 const logoutBtn = document.querySelector(".logout-btn");
 const profileInfoForm = document.getElementById("profileInfo");
+const carousel = document.querySelector(".hero-carousel");
+
+if (carousel) {
+  console.log("we out");
+  carouselController();
+} else {
+  console.log("we not out");
+}
 
 // ANCHOR -- Weather Widget --
 if (weatherWidget) {
   // Set Weather Variables
   const apiRoot = "https://api.openweathermap.org/data/2.5/weather";
   const city = "Contoocook";
-  // const country = "us";
-  // const state = "nh";
   const units = "imperial";
   const apiKey = "";
 
@@ -30,13 +37,12 @@ if (weatherWidget) {
     renderWeatherData(weatherData, units);
   });
 
-  // Location Form Submit
+  // Weather Form Submit
   const weatherForm = document.querySelector(".weather-form");
   weatherForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log("weather form submitted");
     // 1) Get user input info
-    // console.log(stateInput);
     const unitInput =
       document.querySelector(".unit-input").value === "F"
         ? "imperial"

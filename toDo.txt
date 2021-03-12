@@ -3,10 +3,7 @@ FRONT-END
 ================
 - build weather API (this may need to communicate with the back-end, not sure)
   - make api get location from user automatically?
-- build content slider on hero page
 - make link buttons on all pages work
-- add logout button to dashboard
-- make dynamic navbar
 - refactor css code
 - Dashboard stuff:
  - your jobs
