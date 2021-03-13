@@ -36,7 +36,7 @@ module.exports.loginUser = async (req, res, next) => {
     // console.log(
     //   "❌ Login failed: user does not exist or password was incorrect ❌"
     // );
-    return next(new AppError("Incorrect Email or password", 401));
+    return next(new AppError("Incorrect Email or Password", 401));
   }
   // 4) send token to client
   createSendToken(user, 200, req, res);

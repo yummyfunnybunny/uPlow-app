@@ -14,6 +14,8 @@ FRONT-END
  - payments
  - settings
 
+ -FIX CONTENT SLIDER
+
 ================
 BACK-END
 ================
@@ -26,4 +28,6 @@ BACK-END
 FIND WORK
 ================
 - when the page loads, we need to retreive location data WITHIN a certain range
--
+- create markers on the map for the locations
+- should be able to click the markers and render location data below the map
+- 

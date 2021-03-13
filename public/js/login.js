@@ -25,7 +25,6 @@ export const login = async (email, password) => {
     }
     // 3) log error if login was unsuccessful
   } catch (err) {
-    // console.log(`POOP: ${err}`);
     showToast("error", err.response.data.message);
   }
 };

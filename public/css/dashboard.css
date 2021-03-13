@@ -3,9 +3,6 @@
 ANCHOR Dashboard
 ===============
 */
-.section-dashboard {
-  /* height: 100vh; */
-}
 .section-dashboard .container {
   display: flex;
   align-items: center;
@@ -15,9 +12,6 @@ ANCHOR Dashboard
 }
 .dashboard {
   display: flex;
-  background: var(--bg-glass1);
-  backdrop-filter: blur(2rem);
-  border-radius: var(--radius);
   width: 100%;
   height: 95%;
   margin-top: 0.5rem;
@@ -25,10 +19,10 @@ ANCHOR Dashboard
 }
 .dashboard-menu {
   flex: 1;
-  background: var(--bg-glass2);
+  background: var(--color-bg1);
   backdrop-filter: blur(2rem);
   border-radius: var(--radius);
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
 }
 .menu-account {
   display: flex;
@@ -44,7 +38,7 @@ ANCHOR Dashboard
 }
 .account-info--status {
   border-radius: var(--radius);
-  background: chartreuse;
+  background: var(--color-bg-green);
   display: inline-block;
   padding: 0 1rem;
 }
@@ -54,37 +48,23 @@ ANCHOR Dashboard
   align-items: center;
   justify-content: space-around;
 }
-/* .menu-options button {
-  font-size: 1.25rem;
-  width: auto;
-  margin: 0.5rem;
-  letter-spacing: 0.25rem;
-} */
-.menu-options ul {
+.menu-options {
   display: flex;
   flex-direction: column;
   align-items: space-around;
   width: 100%;
+  margin: 2rem 0;
 }
-.menu-options ul li {
-  font-family: inherit;
-  padding: 0.75rem;
-  list-style-type: none;
-  width: 100%;
-  cursor: pointer;
-  border: 2px solid rgba(0, 0, 0, 0);
-}
-.menu-options ul li:hover {
-  border: 2px solid var(--color-text1);
-}
-.menu-options ul li a {
+.menu-options a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 90%;
+  margin: 0.5rem;
 }
-.menu-options ul li i {
+.menu-options a i {
   font-size: 1.5rem;
-  margin: 0 2rem;
+  margin: 0.5rem 2rem;
 }
 .dashboard-content {
   flex: 3;
@@ -100,10 +80,10 @@ ANCHOR Messages
 }
 .contacts-list {
   flex: 1;
-  background: var(--bg-glass1);
+  background: var(--color-bg1);
   backdrop-filter: blur(2rem);
   border-radius: var(--radius);
-  /* border: 2px solid var(--color-text1); */
+  /* border: 2px solid var(--color-dark-blue); */
   margin: 0 0.25rem 0 0.5rem;
   overflow: auto;
 }
@@ -111,13 +91,13 @@ ANCHOR Messages
   padding: 0.5rem;
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);
-  background: var(--color-text1);
+  background: var(--color-dark-blue);
   color: #fff;
 }
 .contact {
-  border-bottom: 2px solid var(--color-text1);
-  border-left: 2px solid var(--color-text1);
-  border-right: 2px solid var(--color-text1);
+  border-bottom: 2px solid var(--color-dark-blue);
+  border-left: 2px solid var(--color-dark-blue);
+  border-right: 2px solid var(--color-dark-blue);
   display: flex;
   align-items: center;
   height: 5rem;
@@ -136,7 +116,7 @@ ANCHOR Messages
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
-  border: 2px solid var(--color-text1);
+  border: 2px solid var(--color-dark-blue);
   margin: 0.5rem;
 }
 .contact-details {
@@ -166,8 +146,8 @@ ANCHOR Messages
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
-  background: var(--bg-glass2);
-  color: var(--color-text1);
+  background: var(--color-bg1);
+  color: var(--color-dark-blue);
 }
 .message i {
   display: flex;
@@ -181,22 +161,20 @@ ANCHOR Messages
 .message-text {
   margin-left: 0.5rem;
   border-radius: var(--radius);
-  background: var(--bg-glass2);
-  color: var(--color-text1);
+  background: var(--color-bg1);
+  color: var(--color-dark-blue);
   font-weight: 500;
   padding: 0.25rem 1rem;
 }
 .message:nth-child(even) .message-text {
   margin-right: 0.5rem;
   margin-left: 0;
-  background: var(--color-text1);
+  background: var(--color-dark-blue);
   color: white;
 }
 .message:nth-child(even) .message-pic {
-  background: var(--color-text1);
+  background: var(--color-dark-blue);
   color: white;
-}
-.message p {
 }
 /*
 =============== 
@@ -209,7 +187,7 @@ ANCHOR ALERTS
   height: calc(100% - 2rem);
 }
 .alert {
-  background: var(--bg-glass1);
+  background: var(--color-bg1);
   border-radius: var(--radius);
   backdrop-filter: blur(2rem);
   display: flex;
@@ -222,14 +200,14 @@ ANCHOR ALERTS
   top: 0.5rem;
   right: 0.5rem;
   font-size: 2.5rem;
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
 }
 .alert i.fa-times-circle:hover {
   cursor: pointer;
 }
 .alert-picture {
   flex: 1;
-  border: 2px solid var(--color-text1);
+  border: 2px solid var(--color-dark-blue);
   border-radius: var(--radius);
   display: flex;
   justify-content: center;
@@ -238,18 +216,18 @@ ANCHOR ALERTS
 }
 .alert-picture i {
   font-size: 6rem;
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
 }
 .alert-info {
   flex: 3;
   margin: 1rem 1rem 1rem 0;
 }
 .alert-title {
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
   font-size: 1.5rem;
 }
 .alert-message {
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
 }
 /*
 =============== 
@@ -269,7 +247,7 @@ ANCHOR Account
   flex-direction: column;
   margin: 1rem 0;
 }
-.dashboard-account form .info {
+.dashboard-account form div {
   display: flex;
 }
 .dashboard-account form#profilepic {
@@ -294,20 +272,7 @@ ANCHOR Account
   width: 10rem;
   height: 10rem;
 }
-.dashboard-account form .labels,
-.dashboard-account form .inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-.dashboard-account form .labels {
-  margin-right: 1rem;
-}
-.dashboard-account form label,
-.dashboard-account form input,
-.dashboard-account form select {
-  margin: 0.5rem 0;
-}
+
 /*
 =============== 
 ANCHOR Dashboard
@@ -361,21 +326,13 @@ ANCHOR Dashboard
     "weather account "
     "settings empty";
 }
-
-.grid > * {
-  display: flex;
-  align-items: center;
-  color: var(--color-text1);
-  background: var(--bg-glass2);
-  border-radius: var(--radius);
-}
 .grid-item {
   border: 4px solid transparent;
 }
 .grid-item:hover {
   cursor: pointer;
-  border: 4px solid var(--color-text1);
-  background-color: var(--color-text1);
+  border: 4px solid var(--color-dark-blue);
+  background-color: var(--color-dark-blue);
   color: #fff;
 }
 .grid-item:first-child {
@@ -384,7 +341,7 @@ ANCHOR Dashboard
 }
 .grid-item i {
   font-size: 2rem;
-  border: 4px solid var(--color-text1);
+  border: 4px solid var(--color-dark-blue);
   height: 5rem;
   min-width: 5rem;
   display: flex;
@@ -414,7 +371,7 @@ ANCHOR Map
   height: 25rem;
   margin: 1rem;
   border-radius: var(--radius);
-  border: 4px solid var(--color-text1);
+  border: 4px solid var(--color-dark-blue);
 }
 /*
 =============== 
@@ -427,7 +384,7 @@ ANCHOR Map Items
   height: calc(100% - 2rem);
 }
 .map-item {
-  background: var(--bg-glass1);
+  background: var(--color-bg1);
   border-radius: var(--radius);
   backdrop-filter: blur(2rem);
   display: flex;
@@ -439,7 +396,7 @@ ANCHOR Map Items
 .top {
   display: flex;
   margin: 1rem;
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
 }
 .top img:nth-child(1) {
   border-radius: var(--radius);
@@ -480,7 +437,7 @@ ANCHOR Map Items
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
-  color: var(--color-text1);
+  color: var(--color-dark-blue);
 }
 .notes ul {
   list-style-type: none;
@@ -497,7 +454,7 @@ ANCHOR Map Items
 }
 .toggle-expand {
   border: none;
-  background: var(--color-text1);
+  background: var(--color-dark-blue);
   color: #fff;
   font-size: 1.5rem;
   padding: 0.25rem 0;

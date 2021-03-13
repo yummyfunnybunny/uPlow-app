@@ -8446,27 +8446,28 @@ exports.renderWeatherData = renderWeatherData;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.showToast = exports.hideToast = void 0;
+exports.showToast = exports.removeToast = void 0;
 
 // ANCHOR -- Hide Toast Notification --
-var hideToast = function hideToast() {
+var removeToast = function removeToast() {
   var el = document.querySelector(".toast");
-
-  if (el) {
+  el.classList.add("hide");
+  setTimeout(function () {
     el.parentElement.removeChild(el);
-  }
+  }, 500);
 }; // ANCHOR -- Show Toast --
 // tpye is 'success' or 'error'
 
 
-exports.hideToast = hideToast;
+exports.removeToast = removeToast;
 
 var showToast = function showToast(type, message) {
-  var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 7;
-  hideToast();
+  var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+  var el = document.querySelector(".toast");
+  if (el) removeToast();
   var markup = "<div class=\"toast toast--".concat(type, "\">").concat(message, "</div>");
   document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
-  window.setTimeout(hideToast, time * 1000);
+  window.setTimeout(removeToast, time * 1000);
 };
 
 exports.showToast = showToast;
@@ -8532,7 +8533,6 @@ function () {
           case 8:
             _context.prev = 8;
             _context.t0 = _context["catch"](0);
-            // console.log(`POOP: ${err}`);
             (0, _toastNotification.showToast)("error", _context.t0.response.data.message);
 
           case 11:
@@ -9379,7 +9379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57763" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64175" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
