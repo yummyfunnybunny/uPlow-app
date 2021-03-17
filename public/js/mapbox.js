@@ -31,6 +31,18 @@ export const displayMap = (locations) => {
     marker.addEventListener("click", () => {
       const coverImage = document.querySelector(".map-item .top img");
       coverImage.src = `/img/coverImages/${location.coverImage}`;
+      const locationName = document.querySelector(".meta-info h1");
+      locationName.innerText = `${location.name}`;
+      const ownerName = document.querySelector(".owner-info span");
+      ownerName.innerText - `${location.owner}`;
+      // const ratingsAvg = document.querySelector('.meta-info div');
+      const instructions = document.querySelector(".notes ul");
+      instructions.innerHTML = "";
+      location.plowInstructions.forEach((note) => {
+        const noteItem = document.createElement("li");
+        noteItem.innerText = note;
+        instructions.appendChild(noteItem);
+      });
     });
 
     // b. Add Markers to map
