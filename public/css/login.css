@@ -1,6 +1,6 @@
 /*
 =============== 
-ANCHOR Login
+ANCHOR Login & Signup
 ===============
 */
 .section-login {
@@ -15,62 +15,30 @@ ANCHOR Login
   height: 85%;
 }
 .login {
-  background: var(--bg-glass1);
-  backdrop-filter: blur(2rem);
-  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 80%;
+  height: 75%;
+  margin: 0.5rem 0 1rem;
   position: relative;
+  padding: 1rem;
 }
-.back-button {
+
+.login a.btn1 {
   position: absolute;
   top: 1rem;
   left: 1rem;
   font-size: 1.25rem;
-  letter-spacing: 0.25rem;
-  text-decoration: none;
   padding: 0.5rem 1.5rem;
 }
-.login-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.form-label {
-  font-size: 1.5rem;
-  color: var(--color-text1);
-}
-.form-input,
-.form-select {
-  border-radius: var(--radius);
-  border: none;
-  padding: 0.25rem 1rem;
-  margin: 0.5rem 0 2rem;
-  font-size: 1rem;
-}
-.form-input:focus {
-  outline: none;
-}
-.form-select {
-}
-.form-submit {
+.login button {
   font-size: 1.25rem;
   padding: 1rem 4rem;
-  letter-spacing: 0.25rem;
-  margin-bottom: 2rem;
 }
 .login-links {
   display: flex;
   justify-content: space-evenly;
   font-size: 0.75rem;
-  margin: 2rem 0;
-}
-.forgot-password {
-}
-.forgot-email {
+  margin: 1rem 0;
 }

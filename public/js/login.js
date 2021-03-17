@@ -6,7 +6,6 @@ import { showToast } from "./toastNotification";
 export const login = async (email, password) => {
   try {
     // 1) send login request to server
-    console.log("running axios");
     const result = await axios({
       method: "POST",
       url: "/api/v1/users/login",
@@ -25,7 +24,6 @@ export const login = async (email, password) => {
     }
     // 3) log error if login was unsuccessful
   } catch (err) {
-    // console.log(`POOP: ${err}`);
     showToast("error", err.response.data.message);
   }
 };

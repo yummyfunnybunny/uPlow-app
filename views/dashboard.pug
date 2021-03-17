@@ -3,55 +3,44 @@ extends base
 block content
   section.section-dashboard
     .container
-        .dashboard.content
-          .dashboard-menu
+        .dashboard.lvl1
+          .dashboard-menu.lvl2
             .menu-account
+              a.prof-pic(href="/dashboard")
+                  img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
               //- i.fas.fa-user-circle
-              img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
-              .account-info
-                .account-info--title
-                  span= user.name
-                h6.account-info--status
-                  span= user.status
-            .menu-options
-              //- button.btn BEGIN PLOWING
-              ul 
-                li
-                  a.show-messages(href='/dashboard-messages')
-                    i.fas.fa-comments    
-                    p Messages
-                li 
-                  a.show-alerts(href='/dashboard-alerts')
-                    i.fas.fa-exclamation-triangle    
-                    p Alerts
-                li 
-                  a.show-jobs(href='/dashboard-jobs')
-                    i.fas.fa-snowplow   
-                    p Your Jobs
-                li 
-                  a.show-routes(href='/dashboard-routes')
-                    i.fas.fa-map-marked-alt   
-                    p Routes
-                li 
-                  a.show-find(href='/dashboard-find')
-                    i.fas.fa-search-location    
-                    p Find Work 
-                li  
-                  a.show-weather(href='/dashboard-weather')
-                    i.fas.fa-cloud-showers-heavy  
-                    p Weather
-                li 
-                  a.show-account(href='/dashboard-account')
-                    i.fas.fa-user-circle    
-                    p Account
-                li 
-                  a.show-payments(href='/dashboard-payments')
-                    i.fas.fa-receipt    
-                    p Payments
-                li 
-                  a.show-settings(href='/dashboard-settings')
-                    i.fas.fa-tools  
-                    p Settings
+              //- img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
+              .col
+                span#title.title= user.name
+                span#status.status= user.status
+            .menu-options 
+              a.btn3.show-messages(href='/dashboard-messages')
+                i.fas.fa-comments    
+                h4 Messages 
+              a.btn3.show-alerts(href='/dashboard-alerts')
+                i.fas.fa-exclamation-triangle    
+                h4 Alerts 
+              a.btn3.show-jobs(href='/dashboard-jobs')
+                i.fas.fa-snowplow   
+                h4 Your Jobs 
+              a.btn3.show-routes(href='/dashboard-routes')
+                i.fas.fa-map-marked-alt   
+                h4 Routes 
+              a.btn3.show-find(href='/dashboard-find')
+                i.fas.fa-search-location    
+                h4 Find Work   
+              a.btn3.show-weather(href='/dashboard-weather')
+                i.fas.fa-cloud-showers-heavy  
+                h4 Weather 
+              a.btn3.show-account(href='/dashboard-account')
+                i.fas.fa-user-circle    
+                h4 Account 
+              a.btn3.show-payments(href='/dashboard-payments')
+                i.fas.fa-receipt    
+                h4 Payments 
+              a.btn3.show-settings(href='/dashboard-settings')
+                i.fas.fa-tools  
+                h4 Settings
           .dashboard-content
             //- h1.section-title.dashboard-title Title
             //- h3 Dashboard Content Will Go Here
@@ -60,9 +49,9 @@ block content
                 include _messages
               else if alerts === true
                 include _alerts
-              else if alerts === true
-                include _alerts
               else if jobs === true
+                include _jobs
+              else if routes === true
                 include _routes
               else if find === true
                 include _find
@@ -74,6 +63,8 @@ block content
                 include _payments
               else if settings === true
                 include _settings
+              else if dashboard === true
+                include _dashboard
                 
             
 

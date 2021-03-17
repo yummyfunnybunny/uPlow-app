@@ -25,13 +25,17 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["plower", "resident", "admin"],
+      enum: ["plower", "resident", "admin", "resident/plower"],
       default: "resident",
     },
     status: {
       type: String,
       enum: ["accepting work", "ready", "not ready", "unavailable"],
       default: "ready",
+    },
+    committedJobs: {
+      type: String,
+      default: "",
     },
     password: {
       type: String,

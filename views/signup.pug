@@ -9,26 +9,32 @@ extends base
 //- ANCHOR -- Content Block -- 
 
 block content
-  section.section-signup
+  section.section-login
     .container
-        .signup.content
-          form.signup-form#signupForm()
-            h1.section-title signup
-            label.form-label Name
-            input#nameInput.form-input(placeholder="Name" type="text" name="" required maxlength="100")
-            label.form-label Email
-            input#emailInput.form-input(placeholder="Email" type="text" name="" required maxlength="100")
-            label.form-label Password
-            input#passwordInput.form-input(placeholder="password" type="password" required minLength="8" maxLength='50')
-            label.form-label Confirm Password
-            input#passwordConfirmInput.form-input(placeholder="Confirm Password" type="password" required minLength="8" maxLength='50')
-            label.form-label Choose Your Role
-            select#roleSelect.form-select(name="form_select")
-              option(value="resident") Resident  
-              option(value="plower") Plower  
-              option(value="resident_plower") Resident and Plower  
-            button.btn.form-submit Submit
-          a.btn.back-button(href="/") Back
+        .login.lvl1
+          h1.section-title signup
+          form#signupForm()
+            div
+              .labels
+                label.form-label Name
+                label.form-label Email
+                label.form-label Password
+                label.form-label Confirm Password
+                label.form-label Choose Your Role
+
+              .inputs
+                input#nameInput(placeholder="Name" type="text" name="" required maxlength="100")
+                input#emailInput(placeholder="Email" type="text" name="" required maxlength="100")
+                input#passwordInput(placeholder="password" type="password" required minLength="8" maxLength='50')
+                input#passwordConfirmInput(placeholder="Confirm Password" type="password" required minLength="8" maxLength='50')
+                select#roleSelect.form-select(name="form_select")
+                  option(value="resident") Resident  
+                  option(value="plower") Plower  
+                  option(value="resident_plower") Resident and Plower  
+            button.btn2 
+              h4 Submit
+          a.btn1(href="/") 
+            h4 Back
           //- .signup-links
             //- a.forgot-password(href="#") I Forgot My Password
             //- a.forgot-email(href="#") I Forgot My Email

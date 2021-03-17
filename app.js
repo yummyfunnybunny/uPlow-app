@@ -12,6 +12,7 @@ const transactionRouter = require("./routes/transactionRoutes");
 const plowRouter = require("./routes/plowRoutes");
 const viewRouter = require("./routes/viewRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
+const weatherRouter = require("./routes/weatherRoutes");
 
 // ANCHOR -- Initialize Express
 const app = express();
@@ -40,8 +41,9 @@ app.use(
         "'unsafe-inline'",
         "https://bundle.js:8828",
         "http://127.0.0.1:3000/js/weatherApi",
+        "https://*.mapbox.com",
       ],
-      frameSrc: ["'self'", "https://bundle.js:*"],
+      frameSrc: ["'self'", "https://bundle.js:*", "https://*.mapbox.com"],
       objectSrc: ["'none'"],
       styleSrc: [
         "'self'",
@@ -51,10 +53,24 @@ app.use(
         "https://use.fontawesome.com/8877301646.css",
         "https://use.fontawesome.com/releases/v4.7.0/css/font-awesome-css.min.css",
         "https://use.fontawesome.com/releases/v5.15.2/css/all.css",
+        "https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css",
       ],
-      workerSrc: ["'self'", "data:", "blob:", "https://bundle.js:*"],
+      workerSrc: [
+        "'self'",
+        "data:",
+        "blob:",
+        "https://bundle.js:*",
+        "https://*.mapbox.com",
+      ],
       childSrc: ["'self'", "blob:"],
-      imgSrc: ["'self'", "data:", "blob:", "https://bundle.js:*"],
+      imgSrc: [
+        "*",
+        "'self'",
+        "data:",
+        "blob:",
+        "https://bundle.js:*",
+        "https://*.mapbox.com",
+      ],
       formAction: ["'self'"],
       connectSrc: [
         "'self'",
@@ -65,6 +81,7 @@ app.use(
         "https://api.openweathermap.org/data/2.5/weather",
         "https://bundle.js:*",
         "ws://127.0.0.1:*/",
+        "https://*.mapbox.com",
       ],
       upgradeInsecureRequests: [],
     },
@@ -95,6 +112,7 @@ app.use("/api/v1/locations", locationRouter);
 app.use("/api/v1/transactions", transactionRouter);
 app.use("/api/v1/plows", plowRouter);
 app.use("/api/v1/reviews", reviewRouter);
+// app.use("/api/v1/weather", weatherRouter);
 
 // ANCHOR -- Handle Unhandled Routes --
 app.all("*", (req, res, next) => {

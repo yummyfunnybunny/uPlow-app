@@ -1,19 +1,27 @@
 //- ANCHOR NAVBAR
-section.section-navbar
+section.navbar-section
   .container
     // content
-    nav.navbar.content
-      a.nav-logo.element(href="/")
-        i.fas.fa-snowplow.company-logo.sub-element
-        h3.company-title.sub-element uPlow
-      .nav-links.element
+    nav.navbar.lvl1
+      a.nav-logo(href="/")
+        i.fas.fa-snowplow
+        h3 uPlow
+      .nav-links
         if homePage === true
-          a.sub-element(href='/#features') Features
-          a.sub-element(href='/#getStarted') Get Started
-          a.sub-element(href='#') About Us
-          a.sub-element(href='#') Contact
+          a.btn1(href='/#features') 
+            h4 Features
+          a.btn1(href='/#getStarted') 
+            h4 Get Started
+          a.btn1(href='#') 
+            h4 About Us
+          a.btn1(href='#') 
+            h4 Contact
         else if homePage === false
-          a.sub-element(href='/guide') Guide
-          a.sub-element(href='/support') Support
-          a.sub-element(href='/dashboard') Dashboard
-          a.logout-btn.sub-element logout
+          a.btn1(href='/guide') 
+            h4 Guide
+          a.btn1(href='/support') 
+            h4 Support
+          a.btn1(href='/dashboard') 
+            h4 Dashboard
+          a.btn1.logout-btn 
+            h4 logout

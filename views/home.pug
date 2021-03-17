@@ -6,52 +6,53 @@ block content
     //- ============
     //- ANCHOR HERO
     //- ============
-    section.section-hero
+    section.hero-section
       .container
-        .hero-highlights.content
-          // content slider will go here
-          h1 Content Slider Will Go Here
-        .hero-extras.content
-          .hero-account.element
+        .hero-carousel.lvl1
+          include _carousel
+          //- h1 Content Slider Will Go Here
+        .hero-extras
+          .hero-account.lvl1
             // your account info / login and signup button
            
               
             if user
               //- LOGGED-IN:
-              .account--logged-in.sub-element
-                a.account-portrait(href="/dashboard")
+              .account--logged-in
+                a.prof-pic(href="/dashboard")
                   img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
-                .hero-account-info
-                  .account-name
-                    span= user.name
-                  .account-actions
-                    .account-status
-                      span= user.status
+                .account-info
+                  span= user.name
+                  //- .account-actions
+                  .row
+                    span.status= user.status
                     .logout
-                      a.btn.logout-btn Logout
-                .begin-work.btn
+                      a#logoutBtn.btn1 Logout
+                a.btn2.begin-work(href="#")
                   i.fas.fa-snowplow
-                a.account-messages(href="/dashboard-messages")
+                a.btn1.account-messages(href="/dashboard-messages")
                   i.fas.fa-comments
-                a.account-alerts(href="/dashboard-alerts")
+                a.btn1.account-alerts(href="/dashboard-alerts")
                   i.fas.fa-exclamation-triangle
-                a.account-jobs(href="/dashboard-jobs")
+                a.btn1.account-jobs(href="/dashboard-jobs")
                   i.fas.fa-snowplow
-                a.account-find(href="/dashboard-find")
+                a.btn1.account-find(href="/dashboard-find")
                   i.fas.fa-search-location
             
             else
               //- NOT LOGGED-IN:
-              .account--logged-out.sub-element
+              .account--logged-out
                 h3 You are not logged in
                 .auth-buttons
-                  a.btn.hero-login(href="/login") Login
-                  a.btn.hero-login(href="/signup") Signup
+                  a.btn2.hero-login(href="/login") 
+                    h4 Login
+                  a.btn2.hero-login(href="/signup") 
+                    h4 Signup
                 .reset-links
                   a.forgot-password I Forgot My Password
                   a.forgot-email I Forgot My Email
 
-          .hero-weather.element
+          .hero-weather.lvl1
             // weather info goes here
             //- h1 Weather Info Goes Here
             .weather-location
@@ -63,7 +64,7 @@ block content
                 select.unit-input(placeholder="°F")
                   option(value="F") °F 
                   option(value="C") °C
-                button.btn.submit-btn(type="submit") 
+                button.btn1.submit-btn(type="submit") 
                   i.fas.fa-search
             .weather-daily
               .weather-icon
@@ -90,42 +91,42 @@ block content
     //- ============
     //- ANCHOR FEATURES
     //- ============
-    section#features.section-features
+    section#features.features-section
       .container
-        .features.content
-          .section-title.element
+        .features.lvl1
+          .section-title
             h1 FEATURES
-          .feature.element
-            .feature-image.sub-element
+          .feature
+            .feature-image
               i.fas.fa-map-marked-alt
               // <h3>Feature Image Goes Here</h3>
-            .feature-info.sub-element
+            .feature-info
               | Use our live map finder to locate and contact residents in need of
               | work, create routes, and set priority to customize your routes
-          .feature.element
-            .feature-info.sub-element
+          .feature
+            .feature-info
               | Rate the locations you service, or rate a plowers service
-            .feature-image.sub-element
+            .feature-image
               i.fas.fa-star-half-alt
-          .feature.element
-            .feature-image.sub-element
+          .feature
+            .feature-image
               i.fas.fa-cloud-showers-heavy
-            .feature-info.sub-element
+            .feature-info
               | Live weather updates keep you ready when you need to be
-          .feature.element
-            .feature-info.sub-element
+          .feature
+            .feature-info
               | Handle all transactions instantly, so you can get a move on
-            .feature-image.sub-element
+            .feature-image
               i.fas.fa-money-check-alt
     //- ============
     //- ANCHOR Get Started
     //- ============
-    section#getStarted.section-get-started
+    section#getStarted.get-started-section
       .container
-        .get-started
-          .section-title.element
+        .get-started.lvl1
+          .section-title
             h1 Get Started
-          .step.element
+          .step
             .step-title
               | Step 1
               br
@@ -135,27 +136,27 @@ block content
               | up!
             .step-image
               i.fas.fa-user-circle
-          .step.element
-            .step-title.sub-element
+          .step
+            .step-title
               | Step 2
               br
               | Set your role
-            .step-instructions.sub-element
+            .step-instructions
               | Choose whether you are a resident looking for a plower, or a
               | plower looking for work!
-            .step-image.sub-element
+            .step-image
               i.fas.fa-snowplow
               i.fas.fa-arrows-alt-h
               i.fas.fa-house-user
-          .step.element
-            .step-title.sub-element
+          .step
+            .step-title
               | Step 3
               br
               | Find what you need!
-            .step-instructions.sub-element
+            .step-instructions
               | Immediately start looking for what you need using our live map
               | finder!
-            .step-image.sub-element
+            .step-image
               i.fas.fa-handshake
     //- ============
     //- ANCHOR Contact

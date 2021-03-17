@@ -7,6 +7,10 @@ const router = express.Router();
 
 // ANCHOR -- Location Routes --
 router
+  .route("/locations-within/:distance/center/:latlng/unit/:unit")
+  .get(locationController.getLocationsWithin);
+
+router
   .route("/")
   .get(locationController.getAllLocations)
   .post(locationController.createLocation);

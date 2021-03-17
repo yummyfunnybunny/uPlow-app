@@ -4,56 +4,78 @@ import { getWeather, renderWeatherData } from "./weatherApi";
 import { login, logout } from "./login";
 import { signup } from "./signup";
 import { updateSettings } from "./updateSettings";
+import { carouselController } from "./carousel";
+import { displayMap } from "./mapbox";
+import axios from "axios";
 
 // Element Selectors
 const weatherWidget = document.querySelector(".hero-weather");
 const loginForm = document.querySelector("#loginForm");
 const signupForm = document.querySelector(".signup-form");
-const logoutBtn = document.querySelector(".logout-btn");
+const logoutBtn = document.querySelector("#logoutBtn");
 const profileInfoForm = document.getElementById("profileInfo");
+const carousel = document.querySelector(".hero-carousel");
+const yourJobs = document.querySelector(".dashboard-jobs");
+const mapbox = document.querySelector(".map");
+const toggleExpand = document.querySelector(".toggle-expand");
+
+if (carousel) {
+  carouselController();
+}
+
+async function getLocalInfo(pos) {
+  try {
+    const localInfo = await axios({
+      method: "POST",
+      url: "",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 // ANCHOR -- Weather Widget --
-if (weatherWidget) {
-  // Set Weather Variables
-  const apiRoot = "https://api.openweathermap.org/data/2.5/weather";
-  const city = "Contoocook";
-  // const country = "us";
-  // const state = "nh";
-  const units = "imperial";
-  const apiKey = "";
+// if (weatherWidget) {
+// 1) get openCage/openWeather apiKeys from backend
+// const openCageKey =
+// 2)
 
-  // Load default weather info on window load
-  window.addEventListener("load", async (e) => {
-    // 1) retreive weatherData from getWeather function
-    const weatherData = await getWeather(apiRoot, city, units, apiKey);
-    // 2) render Weather Data
-    renderWeatherData(weatherData, units);
-  });
+//   navigator.geolocation.getCurrentPosition(getLocalInfo(pos), console.log);
 
-  // Location Form Submit
-  const weatherForm = document.querySelector(".weather-form");
-  weatherForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    console.log("weather form submitted");
-    // 1) Get user input info
-    // console.log(stateInput);
-    const unitInput =
-      document.querySelector(".unit-input").value === "F"
-        ? "imperial"
-        : "metric";
-    // 2) retreive weatherData from getWeather function
-    const cityInput = document.querySelector(".city-input").value;
-    const weatherData = await getWeather(apiRoot, cityInput, unitInput, apiKey);
-    // 2) render Weather Data
-    renderWeatherData(weatherData, unitInput);
-  });
-}
+//   // Set Weather Variables
+//   const apiRoot = "https://api.openweathermap.org/data/2.5/weather";
+//   const city = "Contoocook";
+//   const units = "imperial";
+//   const apiKey = "";
+
+//   // Load default weather info on window load
+//   window.addEventListener("load", async (e) => {
+//     // 1) retreive weatherData from getWeather function
+//     const weatherData = await getWeather(apiRoot, city, units, apiKey);
+//     // 2) render Weather Data
+//     renderWeatherData(weatherData, units);
+//   });
+
+//   // Weather Form Submit
+//   const weatherForm = document.querySelector(".weather-form");
+//   weatherForm.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+//     // 1) Get user input info
+//     const unitInput =
+//       document.querySelector(".unit-input").value === "F"
+//         ? "imperial"
+//         : "metric";
+//     // 2) retreive weatherData from getWeather function
+//     const cityInput = document.querySelector(".city-input").value;
+//     const weatherData = await getWeather(apiRoot, cityInput, unitInput, apiKey);
+//     // 2) render Weather Data
+//     renderWeatherData(weatherData, unitInput);
+//   });
+// }
 
 // ANCHOR -- Login Form --
 if (loginForm) {
-  console.log("form exists");
   loginForm.addEventListener("submit", (e) => {
-    console.log("form submitting");
     e.preventDefault();
     const email = document.querySelector("#emailInput").value;
     const password = document.querySelector("#passwordInput").value;
@@ -63,9 +85,7 @@ if (loginForm) {
 
 // ANCHOR -- Signup Form --
 if (signupForm) {
-  console.log("signup form exists");
   signupForm.addEventListener("submit", (e) => {
-    console.log("signup form submitting");
     e.preventDefault();
     const name = document.querySelector("#nameInput").value;
     const email = document.querySelector("#emailInput").value;
@@ -79,7 +99,6 @@ if (signupForm) {
 
 // ANCHOR -- Logout Button --
 if (logoutBtn) {
-  console.log("logout btn clicked");
   logoutBtn.addEventListener("click", logout);
 }
 
@@ -96,4 +115,35 @@ if (profileInfoForm) {
     console.log("🚀 submitting profile info 🚀");
     updateSettings(form, "data");
   });
+}
+
+if (toggleExpand) {
+  toggleExpand.addEventListener("click", () => {
+    // Switch the chevron icon
+    if (toggleExpand.firstChild.classList.contains("fa-chevron-down")) {
+      toggleExpand.firstChild.classList.remove("fa-chevron-down");
+      toggleExpand.firstChild.classList.add("fa-chevron-up");
+    } else {
+      toggleExpand.firstChild.classList.add("fa-chevron-down");
+      toggleExpand.firstChild.classList.remove("fa-chevron-up");
+    }
+    // Toggle hidden on job elements
+    const elements = toggleExpand.parentElement.children;
+    for (let i = 0; i < elements.length - 1; i++) {
+      if (
+        elements[i].classList.contains("image-galery") ||
+        elements[i].classList.contains("notes") ||
+        // elements[i].classList.contains("map") ||
+        elements[i].classList.contains("actions")
+      ) {
+        elements[i].classList.toggle("hidden");
+      }
+    }
+  });
+}
+
+if (mapbox) {
+  const locations = JSON.parse(mapbox.dataset.locations);
+  // console.log(locations);
+  displayMap(locations);
 }

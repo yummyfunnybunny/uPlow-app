@@ -62,3 +62,11 @@ export const renderWeatherData = (_weatherData, _units) => {
   weatherTempCur.innerText = `${Math.round(temp)}° ${unit}`;
   weatherTempMin.innerText = `${Math.round(temp_min)}° ${unit}`;
 };
+
+// ============================
+export const getOpenCageKey = async () => {
+  const openCageKey = await axios({
+    method: "GET",
+    url: "",
+  });
+};

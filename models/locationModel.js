@@ -48,6 +48,11 @@ const locationSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    status: {
+      type: String,
+      enum: ["available", "unavailable"],
+      default: "available",
+    },
     plowInstructions: [
       {
         type: String,
@@ -81,6 +86,9 @@ const locationSchema = new mongoose.Schema(
 );
 
 // SECTION == Create Indexes ==
+
+locationSchema.index({ location: "2dsphere" }); // geospatial data needs to be defined as either '2dsphere' or '2d'
+
 // !SECTION
 
 // SECTION == Virtual Properties ==
@@ -93,6 +101,13 @@ const locationSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Query Middle-Ware ==
+
+// ANCHOR -- Filter Out Unavailable Locations --
+// available locations are ones that currently need work and do not have a dedicated plower
+locationSchema.pre(/^find/, function (next) {
+  this.find({ status: { $ne: "unavailable" } });
+  next();
+});
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==
