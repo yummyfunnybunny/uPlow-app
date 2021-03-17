@@ -3,5 +3,5 @@ block append head
   link(href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet')
 
 .dashboard-find
-  #map.map
+  #map.map(data-locations=`${JSON.stringify(locations)}`)
   include _mapItem

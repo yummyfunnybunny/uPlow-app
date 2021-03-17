@@ -7,7 +7,7 @@ const catchAsync = require("../Utilities/catchAsync");
 const AppError = require("../Utilities/appError");
 const { getWeather, getUnit } = require("../utilities/openWeatherApi");
 const { getLocationsWithin } = require("./locationController");
-const axios = require("axios");
+// const { default: axios } = require("axios");
 
 // SECTION == Middleware ==
 // !SECTION
@@ -102,10 +102,12 @@ exports.getDashboardRoutes = (req, res, next) => {
 exports.getDashboardFind = async (req, res, next) => {
   const homePage = false;
   const find = true;
+  const locations = await getLocationsWithin(50, "43.220182, -71.702017", "mi");
   res.status(200).render("dashboard", {
     title: "Dashboard | uPlow",
     homePage: homePage,
     find: find,
+    locations: locations,
   });
 };
 

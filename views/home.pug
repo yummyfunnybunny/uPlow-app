@@ -19,16 +19,15 @@ block content
             if user
               //- LOGGED-IN:
               .account--logged-in
-                a.account-portrait(href="/dashboard")
+                a.prof-pic(href="/dashboard")
                   img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
-                .hero-account-info
-                  .account-name
-                    span= user.name
-                  .account-actions
-                    .account-status
-                      span= user.status
+                .account-info
+                  span= user.name
+                  //- .account-actions
+                  .row
+                    span.status= user.status
                     .logout
-                      a.btn1.logout-btn Logout
+                      a#logoutBtn.btn1 Logout
                 a.btn2.begin-work(href="#")
                   i.fas.fa-snowplow
                 a.btn1.account-messages(href="/dashboard-messages")

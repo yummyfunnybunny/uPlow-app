@@ -6,7 +6,6 @@ import { showToast } from "./toastNotification";
 export const login = async (email, password) => {
   try {
     // 1) send login request to server
-    console.log("running axios");
     const result = await axios({
       method: "POST",
       url: "/api/v1/users/login",

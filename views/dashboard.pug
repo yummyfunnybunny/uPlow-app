@@ -4,15 +4,15 @@ block content
   section.section-dashboard
     .container
         .dashboard.lvl1
-          .dashboard-menu
+          .dashboard-menu.lvl2
             .menu-account
+              a.prof-pic(href="/dashboard")
+                  img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
               //- i.fas.fa-user-circle
-              img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
-              .account-info
-                .account-info--title
-                  span= user.name
-                h6.account-info--status
-                  span= user.status
+              //- img(src=`/img/users/${user.photo}` alt=`photo of ${user.name}`)
+              .col
+                span#title.title= user.name
+                span#status.status= user.status
             .menu-options 
               a.btn3.show-messages(href='/dashboard-messages')
                 i.fas.fa-comments    

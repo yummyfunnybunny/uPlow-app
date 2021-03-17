@@ -6,12 +6,13 @@ import { signup } from "./signup";
 import { updateSettings } from "./updateSettings";
 import { carouselController } from "./carousel";
 import { displayMap } from "./mapbox";
+import axios from "axios";
 
 // Element Selectors
 const weatherWidget = document.querySelector(".hero-weather");
 const loginForm = document.querySelector("#loginForm");
 const signupForm = document.querySelector(".signup-form");
-const logoutBtn = document.querySelector(".logout-btn");
+const logoutBtn = document.querySelector("#logoutBtn");
 const profileInfoForm = document.getElementById("profileInfo");
 const carousel = document.querySelector(".hero-carousel");
 const yourJobs = document.querySelector(".dashboard-jobs");
@@ -20,41 +21,57 @@ const toggleExpand = document.querySelector(".toggle-expand");
 
 if (carousel) {
   carouselController();
-} else {
+}
+
+async function getLocalInfo(pos) {
+  try {
+    const localInfo = await axios({
+      method: "POST",
+      url: "",
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // ANCHOR -- Weather Widget --
-if (weatherWidget) {
-  // Set Weather Variables
-  const apiRoot = "https://api.openweathermap.org/data/2.5/weather";
-  const city = "Contoocook";
-  const units = "imperial";
-  const apiKey = "";
+// if (weatherWidget) {
+// 1) get openCage/openWeather apiKeys from backend
+// const openCageKey =
+// 2)
 
-  // Load default weather info on window load
-  window.addEventListener("load", async (e) => {
-    // 1) retreive weatherData from getWeather function
-    const weatherData = await getWeather(apiRoot, city, units, apiKey);
-    // 2) render Weather Data
-    renderWeatherData(weatherData, units);
-  });
+//   navigator.geolocation.getCurrentPosition(getLocalInfo(pos), console.log);
 
-  // Weather Form Submit
-  const weatherForm = document.querySelector(".weather-form");
-  weatherForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    // 1) Get user input info
-    const unitInput =
-      document.querySelector(".unit-input").value === "F"
-        ? "imperial"
-        : "metric";
-    // 2) retreive weatherData from getWeather function
-    const cityInput = document.querySelector(".city-input").value;
-    const weatherData = await getWeather(apiRoot, cityInput, unitInput, apiKey);
-    // 2) render Weather Data
-    renderWeatherData(weatherData, unitInput);
-  });
-}
+//   // Set Weather Variables
+//   const apiRoot = "https://api.openweathermap.org/data/2.5/weather";
+//   const city = "Contoocook";
+//   const units = "imperial";
+//   const apiKey = "";
+
+//   // Load default weather info on window load
+//   window.addEventListener("load", async (e) => {
+//     // 1) retreive weatherData from getWeather function
+//     const weatherData = await getWeather(apiRoot, city, units, apiKey);
+//     // 2) render Weather Data
+//     renderWeatherData(weatherData, units);
+//   });
+
+//   // Weather Form Submit
+//   const weatherForm = document.querySelector(".weather-form");
+//   weatherForm.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+//     // 1) Get user input info
+//     const unitInput =
+//       document.querySelector(".unit-input").value === "F"
+//         ? "imperial"
+//         : "metric";
+//     // 2) retreive weatherData from getWeather function
+//     const cityInput = document.querySelector(".city-input").value;
+//     const weatherData = await getWeather(apiRoot, cityInput, unitInput, apiKey);
+//     // 2) render Weather Data
+//     renderWeatherData(weatherData, unitInput);
+//   });
+// }
 
 // ANCHOR -- Login Form --
 if (loginForm) {
@@ -126,5 +143,7 @@ if (toggleExpand) {
 }
 
 if (mapbox) {
-  displayMap();
+  const locations = JSON.parse(mapbox.dataset.locations);
+  // console.log(locations);
+  displayMap(locations);
 }

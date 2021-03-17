@@ -12,6 +12,7 @@ const transactionRouter = require("./routes/transactionRoutes");
 const plowRouter = require("./routes/plowRoutes");
 const viewRouter = require("./routes/viewRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
+const weatherRouter = require("./routes/weatherRoutes");
 
 // ANCHOR -- Initialize Express
 const app = express();
@@ -111,6 +112,7 @@ app.use("/api/v1/locations", locationRouter);
 app.use("/api/v1/transactions", transactionRouter);
 app.use("/api/v1/plows", plowRouter);
 app.use("/api/v1/reviews", reviewRouter);
+// app.use("/api/v1/weather", weatherRouter);
 
 // ANCHOR -- Handle Unhandled Routes --
 app.all("*", (req, res, next) => {

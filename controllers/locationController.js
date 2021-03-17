@@ -79,17 +79,65 @@ module.exports.deleteLocation = catchAsync(async (req, res, next) => {
 
 // ANCHOR -- Get locations Within --
 // url example: // /locations/locations-within/400/center/34.111745,-118.113491/unit/mi
-exports.getLocationsWithin = catchAsync(async (req, res, next) => {
-  // destructure the url parameters into their own constants
-  const { distance, latlng, unit } = req.params;
+// exports.getLocationsWithin = catchAsync(async (req, res, next) => {
+//   // destructure the url parameters into their own constants
+//   const { distance, latlng, unit } = req.params;
+
+//   // destructure the latlng constant into an array of separated units
+//   const [lat, lng] = latlng.split(",");
+
+//   // define the radius by converting the distance provided into the mongoDB accepted unit 'radian'
+//   // Earth Radius in miles: 3963.2
+//   // Earth radius in kilometers: 6378.1
+//   const radius = unit === "mi" ? distance / 3963.2 : distance / 6378.1;
+
+//   // If lat/lng was not provided in correct format, throw an error
+//   if (!lat || !lng) {
+//     next(
+//       new AppError(
+//         "Please provide  latitude and longitude in the format lat,lng.",
+//         400
+//       )
+//     );
+//   }
+
+//   // check the variables if you want to...
+//   console.log(distance, lat, lng, unit);
+
+//   // filter the locations based on the startLocation being within the desired distance
+//   // '$geoWithin' is an operator like '$lt/$gte', but for geospatial data
+//   const locations = await Location.find({
+//     location: {
+//       $geoWithin: {
+//         // notice that longitude comes first in geoJSON, NOT latitude
+//         $centerSphere: [[lng, lat], radius],
+//       },
+//     },
+//   });
+
+//   // const locations = await Location.find();
+//   console.log(locations);
+
+//   // Send success response
+//   res.status(200).json({
+//     status: "success",
+//     results: locations.length,
+//     data: {
+//       data: locations,
+//     },
+//   });
+// });
+
+exports.getLocationsWithin = async (dis, coords, unit) => {
+  // Coord is in this format: 'latitude, longitude'
 
   // destructure the latlng constant into an array of separated units
-  const [lat, lng] = latlng.split(",");
+  const [lat, lng] = coords.split(",");
 
   // define the radius by converting the distance provided into the mongoDB accepted unit 'radian'
   // Earth Radius in miles: 3963.2
   // Earth radius in kilometers: 6378.1
-  const radius = unit === "mi" ? distance / 3963.2 : distance / 6378.1;
+  const radius = unit === "mi" ? dis / 3963.2 : dis / 6378.1;
 
   // If lat/lng was not provided in correct format, throw an error
   if (!lat || !lng) {
@@ -102,7 +150,7 @@ exports.getLocationsWithin = catchAsync(async (req, res, next) => {
   }
 
   // check the variables if you want to...
-  console.log(distance, lat, lng, unit);
+  // console.log(dis, lat, lng, unit);
 
   // filter the locations based on the startLocation being within the desired distance
   // '$geoWithin' is an operator like '$lt/$gte', but for geospatial data
@@ -118,13 +166,16 @@ exports.getLocationsWithin = catchAsync(async (req, res, next) => {
   // const locations = await Location.find();
   console.log(locations);
 
+  // return the results
+  return locations;
+
   // Send success response
-  res.status(200).json({
-    status: "success",
-    results: locations.length,
-    data: {
-      data: locations,
-    },
-  });
-});
+  // res.status(200).json({
+  //   status: "success",
+  //   results: locations.length,
+  //   data: {
+  //     data: locations,
+  //   },
+  // });
+};
 // !SECTION
