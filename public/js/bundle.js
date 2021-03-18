@@ -8934,6 +8934,18 @@ var displayMap = function displayMap(locations) {
     marker.addEventListener("click", function () {
       var coverImage = document.querySelector(".map-item .top img");
       coverImage.src = "/img/coverImages/".concat(location.coverImage);
+      var locationName = document.querySelector(".meta-info h1");
+      locationName.innerText = "".concat(location.name);
+      var ownerName = document.querySelector(".owner-info span");
+      ownerName.innerText - "".concat(location.owner); // const ratingsAvg = document.querySelector('.meta-info div');
+
+      var instructions = document.querySelector(".notes ul");
+      instructions.innerHTML = "";
+      location.plowInstructions.forEach(function (note) {
+        var noteItem = document.createElement("li");
+        noteItem.innerText = note;
+        instructions.appendChild(noteItem);
+      });
     }); // b. Add Markers to map
 
     new mapboxgl.Marker({
@@ -9420,7 +9432,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49469" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50542" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
