@@ -17,7 +17,7 @@ router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:token", authController.resetPassword);
 
 // Protect routes from un-logged-in users
-// router.use(authController.protectRoutes);
+router.use(authController.protectRoutes);
 router.patch("/updateMyPassword", authController.updatePassword);
 // router.get("/Me", userController.getMe, userController.getUser);
 router.patch(

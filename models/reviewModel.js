@@ -25,24 +25,24 @@ const reviewSchema = new mongoose.Schema(
     plower: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true, "A review must have a plower"],
+      // required: [true, "A review must have a plower"],
     },
     // Who was the resident for the plow performed
     resident: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true, "A review must have a resident"],
+      // required: [true, "A review must have a resident"],
+    },
+    // Who wrote the review
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      // required: [true, "A review must have an author"],
     },
     // When was the review created
     timeStamp: {
       type: Date,
       default: Date.now(),
-    },
-    // Who does the review belong to
-    owner: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: [true, "A review must have an owner"],
     },
   },
   {
@@ -65,6 +65,24 @@ const reviewSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Query Middle-Ware ==
+
+// ANCHOR -- Populate References --
+reviewSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "location",
+    select: "-__v -owner",
+  })
+    .populate({
+      path: "resident",
+      select: "-__v -active -password -ownedLocations",
+    })
+    .populate({
+      path: "plower",
+      select: "-__v -active -password -ownedLocations",
+    });
+  next();
+});
+
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==

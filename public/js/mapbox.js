@@ -25,23 +25,39 @@ export const displayMap = (locations) => {
     const marker = document.createElement("div");
     marker.className = "marker";
     marker.classList.add("fas");
-    marker.classList.add("fa-map-marker");
+    marker.classList.add("fa-house-user");
 
     // add event listener to markers
     marker.addEventListener("click", () => {
+      // de-select all markers, than select the clicked one
+      const markers = document.querySelectorAll(".mapboxgl-marker");
+      markers.forEach((el) => {
+        el.classList.remove("mapbox-marker-selected");
+      });
+      marker.classList.add("mapbox-marker-selected");
+
+      // save all nodes that we will dynamically render location data into
       const coverImage = document.querySelector(".map-item .top img");
-      coverImage.src = `/img/coverImages/${location.coverImage}`;
       const locationName = document.querySelector(".meta-info h1");
-      locationName.innerText = `${location.name}`;
+      const ownerPic = document.querySelector(".prof-pic img");
       const ownerName = document.querySelector(".owner-info span");
+      const instructions = document.querySelector(".notes ul");
+      const gallery = document.querySelectorAll(".image-gallery img");
+
+      // Fill all nodes with proper location data
+      coverImage.src = `/img/coverImages/${location.coverImage}`;
+      locationName.innerText = `${location.name}`;
+      // ownerPic.src = '/img/users/location.'
       ownerName.innerText - `${location.owner}`;
       // const ratingsAvg = document.querySelector('.meta-info div');
-      const instructions = document.querySelector(".notes ul");
       instructions.innerHTML = "";
       location.plowInstructions.forEach((note) => {
         const noteItem = document.createElement("li");
         noteItem.innerText = note;
         instructions.appendChild(noteItem);
+      });
+      gallery.forEach((img, idx) => {
+        img.src = `/img/locations/driveway${idx + 1}.jpg`;
       });
     });
 
@@ -54,18 +70,15 @@ export const displayMap = (locations) => {
       .addTo(map);
 
     // c. Add popup info
-    new mapboxgl.Popup({
-      offset: 30,
-      closeButton: true,
-      closeOnClick: false,
-    })
+    // new mapboxgl.Popup({
+    //   offset: 30,
+    //   closeButton: false,
+    //   closeOnClick: true,
+    // })
 
-      .setLngLat(location.location.coordinates)
-      .setHTML(
-        `<p>${location.name} <br>
-        ${location.type}</p>`
-      )
-      .addTo(map);
+    //   .setLngLat(location.location.coordinates)
+    //   .setHTML(`<p>${location.name}`)
+    //   .addTo(map);
 
     bounds.extend(location.location.coordinates);
   });

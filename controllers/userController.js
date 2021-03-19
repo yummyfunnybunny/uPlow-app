@@ -81,7 +81,7 @@ module.exports.getAllUsers = async (req, res, next) => {
   const users = await User.find();
   // 2) show error message if no users was found
   if (!users) {
-    console.log("no users were found");
+    return next(new AppError("No users were found", 404));
   }
   // 3) send successful response
   res.status(200).json({
@@ -97,7 +97,7 @@ module.exports.createUser = async (req, res, next) => {
   const user = await User.create(req.body);
   // 2) show error message if no user was found
   if (!user) {
-    console.log("no user with that id was found");
+    return next(new AppError("No user found with that ID", 404));
   }
   // 3) send successful response
   res.status(200).json({
@@ -109,10 +109,13 @@ module.exports.createUser = async (req, res, next) => {
 // ANCHOR -- Get User --
 module.exports.getUser = async (req, res, next) => {
   // 1) search DB for user
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id).populate({
+    path: "reviews",
+    select: "-__v",
+  });
   // 2) show error message if no user was found
   if (!user) {
-    console.log("no user with that id was found");
+    return next(new AppError("No user found with that ID", 404));
   }
 
   // 3) send successful response
@@ -131,7 +134,7 @@ module.exports.updateUser = async (req, res, next) => {
   });
   // 2) show error message if no user was found
   if (!user) {
-    console.log("no user with that id was found");
+    return next(new AppError("No user found with that ID", 404));
   }
   // 3) send successful response
   res.status(200).json({
@@ -147,7 +150,7 @@ module.exports.deleteUser = async (req, res, next) => {
 
   // 2) show error message if no user was found
   if (!user) {
-    console.log("no user with that id was found");
+    return next(new AppError("No user found with that ID", 404));
   }
 
   // 3) send successful response

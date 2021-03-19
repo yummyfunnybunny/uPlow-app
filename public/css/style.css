@@ -286,6 +286,38 @@ form button {
   font-size: 1.5rem;
   cursor: pointer;
 }
+/* .mapboxgl-popup, */
+/* .mapboxgl-popup-anchor-bottom, */
+/* .mapboxgl-popup-tip, */
+.mapboxgl-popup-content {
+  background: var(--color-dark-blue);
+  color: var(--color-white);
+  /* border-radius: var(--radius); */
+}
+/* ------- */
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  border-bottom-color: var(--color-dark-blue);
+}
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  border-top-color: var(--color-dark-blue);
+}
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: var(--color-dark-blue);
+}
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: var(--color-dark-blue);
+}
+.mapboxgl-popup-close-button {
+  color: var(--color-white);
+  /* padding-right: 1rem; */
+}
+.mapbox-marker-selected {
+  color: var(--color-light-blue);
+}
 /*
 =============== 
 ANCHOR Navbar

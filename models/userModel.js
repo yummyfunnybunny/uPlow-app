@@ -33,10 +33,6 @@ const userSchema = new mongoose.Schema(
       enum: ["accepting work", "ready", "not ready", "unavailable"],
       default: "ready",
     },
-    committedJobs: {
-      type: String,
-      default: "",
-    },
     password: {
       type: String,
       required: [true, "User must create a valid password"],
@@ -61,6 +57,21 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
+    committedJobs: {
+      type: String,
+      default: "",
+    },
+    ownedLocations: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Location",
+      },
+    ],
+    status: {
+      type: String,
+      enum: ["available", "unavailable"],
+      default: "available",
+    },
   },
   {
     // Schema Options
@@ -76,6 +87,13 @@ const userSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Virtual Populate ==
+
+userSchema.virtual("reviews", {
+  ref: "Review",
+  foreignField: "author",
+  localField: "_id",
+});
+
 // !SECTION
 
 // SECTION == Document Middle-Ware ==
@@ -119,6 +137,15 @@ userSchema.pre("save", function (next) {
 userSchema.pre(/^find/, function (next) {
   // 'this' points to the current query object
   this.find({ active: { $ne: false } });
+  next();
+});
+
+// ANCHOR -- Populate Owned Locations --
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "ownedLocations",
+    select: "-__v -owner",
+  });
   next();
 });
 

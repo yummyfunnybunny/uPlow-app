@@ -8929,22 +8929,36 @@ var displayMap = function displayMap(locations) {
     var marker = document.createElement("div");
     marker.className = "marker";
     marker.classList.add("fas");
-    marker.classList.add("fa-map-marker"); // add event listener to markers
+    marker.classList.add("fa-house-user"); // add event listener to markers
 
     marker.addEventListener("click", function () {
+      // de-select all markers, than select the clicked one
+      var markers = document.querySelectorAll(".mapboxgl-marker");
+      markers.forEach(function (el) {
+        el.classList.remove("mapbox-marker-selected");
+      });
+      marker.classList.add("mapbox-marker-selected"); // save all nodes that we will dynamically render location data into
+
       var coverImage = document.querySelector(".map-item .top img");
-      coverImage.src = "/img/coverImages/".concat(location.coverImage);
       var locationName = document.querySelector(".meta-info h1");
-      locationName.innerText = "".concat(location.name);
+      var ownerPic = document.querySelector(".prof-pic img");
       var ownerName = document.querySelector(".owner-info span");
+      var instructions = document.querySelector(".notes ul");
+      var gallery = document.querySelectorAll(".image-gallery img"); // Fill all nodes with proper location data
+
+      coverImage.src = "/img/coverImages/".concat(location.coverImage);
+      locationName.innerText = "".concat(location.name); // ownerPic.src = '/img/users/location.'
+
       ownerName.innerText - "".concat(location.owner); // const ratingsAvg = document.querySelector('.meta-info div');
 
-      var instructions = document.querySelector(".notes ul");
       instructions.innerHTML = "";
       location.plowInstructions.forEach(function (note) {
         var noteItem = document.createElement("li");
         noteItem.innerText = note;
         instructions.appendChild(noteItem);
+      });
+      gallery.forEach(function (img, idx) {
+        img.src = "/img/locations/driveway".concat(idx + 1, ".jpg");
       });
     }); // b. Add Markers to map
 
@@ -8953,12 +8967,15 @@ var displayMap = function displayMap(locations) {
       anchor: "bottom" // sets the origin of the sprite you are generating
 
     }).setLngLat(location.location.coordinates).addTo(map); // c. Add popup info
+    // new mapboxgl.Popup({
+    //   offset: 30,
+    //   closeButton: false,
+    //   closeOnClick: true,
+    // })
+    //   .setLngLat(location.location.coordinates)
+    //   .setHTML(`<p>${location.name}`)
+    //   .addTo(map);
 
-    new mapboxgl.Popup({
-      offset: 30,
-      closeButton: true,
-      closeOnClick: false
-    }).setLngLat(location.location.coordinates).setHTML("<p>".concat(location.name, " <br>\n        ").concat(location.type, "</p>")).addTo(map);
     bounds.extend(location.location.coordinates);
   }); // 5) Fit Bounds
 
@@ -9391,7 +9408,7 @@ if (toggleExpand) {
     var elements = toggleExpand.parentElement.children;
 
     for (var i = 0; i < elements.length - 1; i++) {
-      if (elements[i].classList.contains("image-galery") || elements[i].classList.contains("notes") || // elements[i].classList.contains("map") ||
+      if (elements[i].classList.contains("image-gallery") || elements[i].classList.contains("notes") || // elements[i].classList.contains("map") ||
       elements[i].classList.contains("actions")) {
         elements[i].classList.toggle("hidden");
       }
@@ -9432,7 +9449,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50542" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62953" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

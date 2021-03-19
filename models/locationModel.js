@@ -51,7 +51,7 @@ const locationSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["available", "unavailable"],
-      default: "available",
+      default: "unavailable",
     },
     plowInstructions: [
       {
@@ -71,12 +71,6 @@ const locationSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    // Reference to user model for 'owner'
-    owner: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: [true, "Location must belong to an owner"],
-    },
   },
   {
     // Schema Options
@@ -95,9 +89,23 @@ locationSchema.index({ location: "2dsphere" }); // geospatial data needs to be d
 // !SECTION
 
 // SECTION == Virtual Populate ==
+
+locationSchema.virtual("owner", {
+  ref: "User",
+  foreignField: "ownedLocations",
+  localField: "_id",
+});
+
 // !SECTION
 
 // SECTION == Document Middle-Ware ==
+
+locationSchema.pre("save", async function (next) {
+  const ownerPromise = this.owner.map(async (id) => await User.findById(id));
+  this.owner = await Promise.all(ownerPromise);
+  next();
+});
+
 // !SECTION
 
 // SECTION == Query Middle-Ware ==

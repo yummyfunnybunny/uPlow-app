@@ -134,8 +134,8 @@ module.exports.isLoggedIn = async (req, res, next) => {
 module.exports.restrictUsers = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      console.log(
-        "💥 Access Denied: You do not have permission to go there 💥"
+      return next(
+        new AppError("💥 Access Denied: You are not an admin 💥", 403)
       );
     }
     next();

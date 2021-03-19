@@ -131,7 +131,7 @@ if (toggleExpand) {
     const elements = toggleExpand.parentElement.children;
     for (let i = 0; i < elements.length - 1; i++) {
       if (
-        elements[i].classList.contains("image-galery") ||
+        elements[i].classList.contains("image-gallery") ||
         elements[i].classList.contains("notes") ||
         // elements[i].classList.contains("map") ||
         elements[i].classList.contains("actions")

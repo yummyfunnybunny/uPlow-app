@@ -12,23 +12,18 @@ const plowSchema = new mongoose.Schema(
     location: {
       type: mongoose.Schema.ObjectId,
       ref: "Location",
-      required: [true, "A plow must have a location"],
+      // required: [true, "A plow must have a location"],
     },
     resident: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true, "A plow must have a residemt"],
+      // required: [true, "A plow must have a residemt"],
     },
     plower: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true, "A plow must have a plower"],
+      // required: [true, "A plow must have a plower"],
     },
-    // transaction: {
-    // type: mongoose.Schema.ObjectId,
-    // ref: "Transaction",
-    // required: [true, "A plow must have a transaction"],
-    // },
   },
   {
     // Schema Options
@@ -50,6 +45,23 @@ const plowSchema = new mongoose.Schema(
 // !SECTION
 
 // SECTION == Query Middle-Ware ==
+
+// ANCHOR -- Populate References --
+plowSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "location",
+    select: "-__v -owner",
+  })
+    .populate({
+      path: "resident",
+      select: "-__v -active -password -ownedLocations",
+    })
+    .populate({
+      path: "plower",
+      select: "-__v -active -password -ownedLocations",
+    });
+  next();
+});
 // !SECTION
 
 // SECTION == Aggregation Middle-Ware ==
