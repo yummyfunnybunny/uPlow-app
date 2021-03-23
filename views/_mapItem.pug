@@ -1,9 +1,8 @@
 .map-item
-    .top 
+    .top
+      //- a(href='/img/coverImages/home1.jpeg')
       img(src='https://picsum.photos/300/200')
-      //- img(src=`/img/locations/${location.coverImage}` alt=`cover image for ${location.name}`)
       .meta-info
-        //- h1=location.name
         h1 Location Name
         div
           i.fas.fa-snowflake
@@ -15,19 +14,17 @@
           .prof-pic
             img(src='https://picsum.photos/50')
           span Owner Name
-          //- img=location.owner.photo
-          //- span=location.owner.name
     .image-gallery.hidden
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      img(src='https://picsum.photos/100')
-      //- img(src=`/img/locations/${location.images[1]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[2]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[3]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[4]}` alt=`image of ${location.name}`)
-      //- img(src=`/img/locations/${location.images[5]}` alt=`image of ${location.name}`)
+      a(href="/img/locations/driveway1.jpg")
+        img(src='https://picsum.photos/100')
+      a(href="/img/locations/driveway2.jpg")
+        img(src='https://picsum.photos/100')
+      a(href="/img/locations/driveway3.jpg")
+        img(src='https://picsum.photos/100')
+      a(href="/img/locations/driveway4.jpg")
+        img(src='https://picsum.photos/100')
+      a(href="/img/locations/driveway5.jpg")
+        img(src='https://picsum.photos/100')
     .notes.hidden
       h2 Instructions and Notes
       ul
@@ -35,8 +32,12 @@
         li please plow all the way up to the side of the garage
     .actions.hidden
       button.btn3 
-        h4 Send Message
-      button.btn3 
-        h4 Cancel Job
+          h4 Send Message
+      if find === true
+        button.btn3 
+          h4 Make Offer
+      else if jobs === true 
+        button.btn3 
+          h4 Cancel Job
     button.toggle-expand
       i.fas.fa-chevron-down

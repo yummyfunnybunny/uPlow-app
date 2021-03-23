@@ -23,6 +23,9 @@ block content
               a.btn3.show-jobs(href='/dashboard-jobs')
                 i.fas.fa-snowplow   
                 h4 Your Jobs 
+              a.btn3.show-places(href='/dashboard-places')
+                i.fas.fa-home   
+                h4 Your Places
               a.btn3.show-routes(href='/dashboard-routes')
                 i.fas.fa-map-marked-alt   
                 h4 Routes 
@@ -42,8 +45,6 @@ block content
                 i.fas.fa-tools  
                 h4 Settings
           .dashboard-content
-            //- h1.section-title.dashboard-title Title
-            //- h3 Dashboard Content Will Go Here
             block dashboard-content
               if messages === true
                 include _messages
@@ -51,6 +52,8 @@ block content
                 include _alerts
               else if jobs === true
                 include _jobs
+              else if places === true 
+                include _places
               else if routes === true
                 include _routes
               else if find === true

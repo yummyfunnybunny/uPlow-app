@@ -7,6 +7,7 @@ const catchAsync = require("../Utilities/catchAsync");
 const AppError = require("../Utilities/appError");
 const { getWeather, getUnit } = require("../utilities/openWeatherApi");
 const { getLocationsWithin2 } = require("./locationController");
+const { Mongoose } = require("mongoose");
 // const { default: axios } = require("axios");
 
 // SECTION == Middleware ==
@@ -88,6 +89,20 @@ exports.getDashboardJobs = (req, res, next) => {
     jobs: jobs,
   });
 };
+// ANCHOR -- Dashboard Your Places --
+exports.getDashboardPlaces = async (req, res, next) => {
+  const homePage = false;
+  const places = true;
+  console.log(res.user.id);
+  const locations = await Location.findById((owner[0]: res.user.id));
+  console.log(locations);
+  res.status(200).render("dashboard", {
+    title: "Dashboard | uPlow",
+    homePage: homePage,
+    places: places,
+    locations: locations,
+  });
+};
 // ANCHOR -- Dashboard Routes --
 exports.getDashboardRoutes = (req, res, next) => {
   const homePage = false;
@@ -107,6 +122,8 @@ exports.getDashboardFind = async (req, res, next) => {
     "43.220182, -71.702017",
     "mi"
   );
+
+  // Send success response with location info
   res.status(200).render("dashboard", {
     title: "Dashboard | uPlow",
     homePage: homePage,

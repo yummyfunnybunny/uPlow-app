@@ -23,6 +23,7 @@ router.get("/dashboard", viewsController.getDashboard);
 router.get("/dashboard-messages", viewsController.getDashboardMessages);
 router.get("/dashboard-alerts", viewsController.getDashboardAlerts);
 router.get("/dashboard-jobs", viewsController.getDashboardJobs);
+router.get("/dashboard-places", viewsController.getDashboardPlaces);
 router.get("/dashboard-routes", viewsController.getDashboardRoutes);
 router.get("/dashboard-find", viewsController.getDashboardFind);
 router.get("/dashboard-weather", viewsController.getDashboardWeather);

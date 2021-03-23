@@ -115,9 +115,6 @@ exports.getLocationsWithin = catchAsync(async (req, res, next) => {
     },
   }).populate("owner");
 
-  // const locations = await Location.find();
-  // console.log(locations);
-
   // Send success response
   res.status(200).json({
     status: "success",
@@ -161,7 +158,6 @@ exports.getLocationsWithin2 = async (dis, coords, unit) => {
     },
   }).populate("owner");
 
-  console.log(locations);
   // return the results
   return locations;
 };

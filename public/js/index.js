@@ -133,7 +133,6 @@ if (toggleExpand) {
       if (
         elements[i].classList.contains("image-gallery") ||
         elements[i].classList.contains("notes") ||
-        // elements[i].classList.contains("map") ||
         elements[i].classList.contains("actions")
       ) {
         elements[i].classList.toggle("hidden");
@@ -144,6 +143,5 @@ if (toggleExpand) {
 
 if (mapbox) {
   const locations = JSON.parse(mapbox.dataset.locations);
-  // console.log(locations);
   displayMap(locations);
 }

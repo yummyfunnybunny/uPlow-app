@@ -1,6 +1,11 @@
 ================
-FRONT-END
+FILE SYSTEM
 ================
+-make 'Create New Location' page, along with 'your locations' page.
+- figure out how to delete files from the system
+- **make new naming convention for uploaded files?
+
+
 - build weather API (this may need to communicate with the back-end, not sure)
   - make api get location from user automatically?
 - make link buttons on all pages work

@@ -1,7 +1,5 @@
-// export const displayMap = (locations) => {
 export const displayMap = (locations) => {
   console.log("MAPBOX LOCATIONS:");
-  console.log(locations);
   // 1) Save Access Token
   mapboxgl.accessToken =
     "pk.eyJ1IjoieXVtbXlmdW5ueWJ1bm55IiwiYSI6ImNrODZwNzQydDA1bjEzZW15NTRqa2NpdnEifQ.6y8NFU2qjw6mTgINZYaRyg";
@@ -28,6 +26,7 @@ export const displayMap = (locations) => {
     marker.classList.add("fa-house-user");
 
     // add event listener to markers
+    console.log(location);
     marker.addEventListener("click", () => {
       // de-select all markers, than select the clicked one
       const markers = document.querySelectorAll(".mapboxgl-marker");
@@ -39,22 +38,26 @@ export const displayMap = (locations) => {
       // save all nodes that we will dynamically render location data into
       const coverImage = document.querySelector(".map-item .top img");
       const locationName = document.querySelector(".meta-info h1");
-      const ownerPic = document.querySelector(".prof-pic img");
+      const ownerPic = document.querySelector(".owner-info .prof-pic img");
       const ownerName = document.querySelector(".owner-info span");
       const instructions = document.querySelector(".notes ul");
+      const imageLinks = document.querySelectorAll(".image-gallery a");
       const gallery = document.querySelectorAll(".image-gallery img");
 
       // Fill all nodes with proper location data
       coverImage.src = `/img/coverImages/${location.coverImage}`;
       locationName.innerText = `${location.name}`;
-      // ownerPic.src = '/img/users/location.'
-      ownerName.innerText - `${location.owner}`;
+      ownerPic.src = `/img/users/${location.owner[0].photo}`;
+      ownerName.innerText = `${location.owner[0].name}`;
       // const ratingsAvg = document.querySelector('.meta-info div');
       instructions.innerHTML = "";
       location.plowInstructions.forEach((note) => {
         const noteItem = document.createElement("li");
         noteItem.innerText = note;
         instructions.appendChild(noteItem);
+      });
+      imageLinks.forEach((link, idx) => {
+        link.href = `/img/locations/driveway${idx + 1}.jpg`;
       });
       gallery.forEach((img, idx) => {
         img.src = `/img/locations/driveway${idx + 1}.jpg`;

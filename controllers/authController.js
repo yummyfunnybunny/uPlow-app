@@ -121,6 +121,7 @@ module.exports.isLoggedIn = async (req, res, next) => {
       }
       // 4.A) there is a logged in user
       res.locals.user = user; // this is what gives access to 'user' in the pug templates
+      res.user = user; // this is how to pass the info through the back end
       return next();
     } catch (err) {
       return next();

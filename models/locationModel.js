@@ -1,5 +1,6 @@
 // ANCHOR -- Require Modules --
 const mongoose = require("mongoose");
+const User = require("./userModel");
 
 // ANCHOR -- Create Tour Schema --
 const locationSchema = new mongoose.Schema(
@@ -102,6 +103,7 @@ locationSchema.virtual("owner", {
 
 locationSchema.pre("save", async function (next) {
   const ownerPromise = this.owner.map(async (id) => await User.findById(id));
+  console.log(ownerPromise);
   this.owner = await Promise.all(ownerPromise);
   next();
 });
